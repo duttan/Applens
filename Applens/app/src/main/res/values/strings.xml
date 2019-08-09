@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Applens</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+    <string-array name="spinner_status_entries">
+        <item>Open</item>
+        <item>Closed</item>
+        <item>Pending Customer</item>
+        <item>Reopen</item>
+        <item>Work in Progress</item>
+    </string-array>
+    <string-array name="spinner_service_entries">
+        <item>Incident Resoluion Unknown Sevices</item>
+        <item>Operational Change Management Services</item>
+    </string-array>
+    <string-array name="spinner_activity_entries">
+        <item>Ticket recording</item>
+        <item>Incident Reporting</item>
+        <item>Documentation</item>
+        <item>KEDB Update</item>
+        <item>Others</item>
+    </string-array>
+
+</resources>
