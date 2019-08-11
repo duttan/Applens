@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="createTicketViewModel"
+                type="com.example.applens.createticket.CreateTicketViewModel" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_add_ticket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cardBackgroundColor="#d8d9d2"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/btn_dialog"
+                    android:id="@+id/close_button" app:layout_constraintStart_toEndOf="@+id/textView4"
+                    android:layout_marginLeft="72dp" android:layout_marginStart="72dp" android:layout_marginTop="24dp"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+
+            <EditText
+                    android:layout_width="259dp"
+                    android:layout_height="45dp"
+                    android:inputType="textPersonName"
+                    android:text=""
+                    android:ems="10"
+                    android:id="@+id/ticket_id"
+                    android:layout_marginTop="116dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginRight="8dp"/>
+            <EditText
+                    android:layout_width="259dp"
+                    android:layout_height="80dp"
+                    android:inputType="textPersonName"
+                    android:text=""
+                    android:ems="10"
+                    android:id="@+id/ticket_desc"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/ticket_id"/>
+            <Button
+                    android:text="OK"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/create_tik_button"
+                    android:onClick="@{() -> createTicketViewModel.onCreateclick()}"
+                    android:layout_marginTop="44dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/spinner_priority" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="136dp" android:layout_marginRight="136dp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            <Spinner
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/spinner_projname" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/spinner_application" android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp" android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/spinner_status"/>
+            <Spinner
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/spinner_application" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp" android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/spinner_ticket_type"/>
+            <Spinner
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/spinner_ticket_type" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/ticket_desc" android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"/>
+            <Spinner
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/spinner_priority" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/opendate" android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp" android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/spinner_projname" app:layout_constraintHorizontal_bias="1.0"/>
+            <Spinner
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/spinner_status" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/ticket_desc"
+                    app:layout_constraintEnd_toStartOf="@+id/spinner_ticket_type" android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp" app:layout_constraintHorizontal_bias="0.0"/>
+            <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:inputType="date"
+                    android:ems="10"
+                    android:id="@+id/opendate" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp" android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/spinner_application"/>
+            <TextView
+                    android:text="Ticket ID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:id="@+id/textView2"
+                    app:layout_constraintTop_toTopOf="@+id/ticket_id"
+                    app:layout_constraintBottom_toBottomOf="@+id/ticket_id"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp" app:layout_constraintEnd_toStartOf="@+id/ticket_id"
+                    android:layout_marginEnd="20dp" android:layout_marginRight="20dp"
+                    app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.482"/>
+            <TextView
+                    android:text="Description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView3"
+                    app:layout_constraintTop_toTopOf="@+id/ticket_desc"
+                    app:layout_constraintBottom_toBottomOf="@+id/ticket_desc"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp" app:layout_constraintEnd_toStartOf="@+id/ticket_desc"
+                    android:layout_marginEnd="20dp" android:layout_marginRight="20dp"/>
+            <TextView
+                    android:text="Create Ticket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView4" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" app:fontFamily="serif"
+                    android:layout_marginTop="28dp" app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0.497"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
