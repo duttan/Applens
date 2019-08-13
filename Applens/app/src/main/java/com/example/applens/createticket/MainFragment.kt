@@ -47,6 +47,8 @@ class MainFragment : Fragment() {
 
         //mainViewModel.alltickets.observe(viewLifecycleOwner, Observer { it?.let { adapter.data = it } })
 
+        //work on recycler view
+
 
         binding.setLifecycleOwner(this)
 
