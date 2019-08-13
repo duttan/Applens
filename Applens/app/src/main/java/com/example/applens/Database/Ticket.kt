@@ -6,12 +6,11 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "ticket_table")
 data class Ticket(
-    @PrimaryKey(autoGenerate = true)
-    var ticket_Id: Long = 0L,
+
+    @PrimaryKey
+    var ticket_Id: String ,
 
     @ColumnInfo(name = "ticketDesc")
-    val ticket_Desc: String = "lol2"
-
-
+    val ticket_Desc: String
 
 )

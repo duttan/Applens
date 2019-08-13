@@ -1,6 +1,7 @@
 package com.example.applens.createticket
 
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import com.example.applens.Database.Ticket
 import com.example.applens.R
 
 
-class TicketlistAdapter: RecyclerView.Adapter<TicketlistAdapter.ViewHolder>() {
+class TicketlistAdapter(tickets: List<Ticket>): RecyclerView.Adapter<TicketlistAdapter.ViewHolder>() {
 
     var data =  listOf<Ticket>()
         set(value) {
@@ -37,7 +38,7 @@ class TicketlistAdapter: RecyclerView.Adapter<TicketlistAdapter.ViewHolder>() {
 
         fun bind(item: Ticket) {
             //val res = itemView.context.resources
-            ticketid.text = item.ticket_Id.toString()
+            ticketid.text = item.ticket_Id
             ticketdesc.text = item.ticket_Desc
 
         }

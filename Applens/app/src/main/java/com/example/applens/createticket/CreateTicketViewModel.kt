@@ -16,21 +16,23 @@ class CreateTicketViewModel(val database: ApplensDatabaseDao,application: Applic
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private var ticket = MutableLiveData<Ticket?>()
+    //private var ticket = MutableLiveData<Ticket?>()
+
+    //private var alltickets = MutableLiveData<List<Ticket?>>()
 
    // private val tickets = database.getAllTickets()
 
-    private val _desc = MutableLiveData<String>()
-    val desc: LiveData<String>
-        get() = _desc
 
 
 
 
-    fun onCreateclick() {
+
+    fun onCreateclick(id: String, desc: String) {
         uiScope.launch {
 
-        Log.i("@@","H"+ desc.value)
+            var ticket = Ticket(id,desc)
+            insert(ticket)
+
 
 
         }
@@ -38,11 +40,20 @@ class CreateTicketViewModel(val database: ApplensDatabaseDao,application: Applic
 
 
 
-//    private suspend fun insert(ticket: Ticket) {
-//        withContext(Dispatchers.IO) {
-//            database.insert(ticket)
-//        }
-//    }
+    private suspend fun insert(ticket: Ticket) {
+        withContext(Dispatchers.IO) {
+            database.insert(ticket)
+
+            var alltickets = database.getAllTickets()
+
+
+        }
+    }
+
+    private fun printo(tiks: List<Ticket>)
+    {
+        tiks.forEach { Log.i("@@",it.ticket_Id + it.ticket_Desc) }
+    }
 
 
 

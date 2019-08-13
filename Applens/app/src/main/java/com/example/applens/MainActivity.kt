@@ -11,8 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import com.example.applens.createticket.CreateTicketFragment
+import com.example.applens.createticket.MainFragment
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,10 +23,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener {
-            supportFragmentManager.beginTransaction().add(R.id.root_layout,CreateTicketFragment(),"").commit()
-        }
+        supportFragmentManager.beginTransaction().add(R.id.base_layout,MainFragment(),"").commit()
+
+
+//        val fab: FloatingActionButton = findViewById(R.id.fab)
+//        fab.setOnClickListener {
+//            supportFragmentManager.beginTransaction().add(R.id.root_layout,CreateTicketFragment(),"").commit()
+//        }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(

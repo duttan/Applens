@@ -29,6 +29,7 @@ class CreateTicketFragment: Fragment()
 
         binding.createTicketViewModel = createTicketViewModel
 
+        binding.createTikButton.setOnClickListener { createTicketViewModel.onCreateclick(binding.ticketId.text.toString(),binding.ticketDesc.text.toString()) }
 
 
         binding.setLifecycleOwner(this)

@@ -1,5 +1,7 @@
 package com.example.applens.Database
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -12,7 +14,7 @@ interface ApplensDatabaseDao {
 
 
     @Query("SELECT * from ticket_table")
-    fun getAllTickets(): Ticket?
+    fun getAllTickets(): List<Ticket>
 
 
-    }
+}
