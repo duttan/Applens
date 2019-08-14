@@ -14,7 +14,8 @@ class CreateTicketViewModel(val database: ApplensDatabaseDao,application: Applic
 
     private var viewModelJob = Job()
 
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    //private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val uiScope = CoroutineScope(Dispatchers.Main )
 
     //private var ticket = MutableLiveData<Ticket?>()
 
