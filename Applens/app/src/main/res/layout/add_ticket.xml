@@ -84,6 +84,7 @@
             <Spinner
                     android:layout_width="170dp"
                     android:layout_height="40dp"
+                    android:entries="@array/spinner_projname_entries"
                     android:id="@+id/spinner_projname" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
                     app:layout_constraintEnd_toStartOf="@+id/spinner_application" android:layout_marginEnd="8dp"
@@ -92,19 +93,23 @@
             <Spinner
                     android:layout_width="170dp"
                     android:layout_height="40dp"
+                    android:entries="@array/spinner_application_entries"
                     android:id="@+id/spinner_application" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp" android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/spinner_ticket_type"/>
             <Spinner
                     android:layout_width="170dp"
                     android:layout_height="40dp"
-                    android:id="@+id/spinner_ticket_type" app:layout_constraintEnd_toEndOf="parent"
+                    android:entries="@array/spinner_tiktype_entries"
+                    android:id="@+id/spinner_ticket_type"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="20dp"
                     app:layout_constraintTop_toBottomOf="@+id/ticket_desc" android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"/>
             <Spinner
                     android:layout_width="170dp"
                     android:layout_height="40dp"
+                    android:entries="@array/spinner_priority_entries"
                     android:id="@+id/spinner_priority" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
                     app:layout_constraintEnd_toStartOf="@+id/opendate" android:layout_marginEnd="8dp"
@@ -113,6 +118,7 @@
             <Spinner
                     android:layout_width="170dp"
                     android:layout_height="40dp"
+                    android:entries="@array/spinner_status_entries"
                     android:id="@+id/spinner_status" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="20dp"
                     app:layout_constraintTop_toBottomOf="@+id/ticket_desc"

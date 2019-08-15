@@ -14,7 +14,7 @@ interface ApplensDatabaseDao {
 
 
     @Query("SELECT * from ticket_table")
-    fun getAllTickets(): List<Ticket>
+    fun getAllTickets(): LiveData<List<Ticket>>
 
 
 }

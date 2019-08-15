@@ -41,4 +41,20 @@
         <item>Others</item>
     </string-array>
 
+    <string-array name="spinner_tiktype_entries">
+        <item>Enhancement</item>
+        <item>Incident Management</item>
+    </string-array>
+
+    <string-array name="spinner_projname_entries">
+        <item>Kimberly-Clark Devops</item>
+        <item>KC Sitecore</item>
+    </string-array>
+
+    <string-array name="spinner_priority_entries">
+        <item>High</item>
+        <item>Medium</item>
+        <item>Low</item>
+    </string-array>
+
 </resources>

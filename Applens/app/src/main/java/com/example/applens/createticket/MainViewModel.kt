@@ -12,8 +12,7 @@ class MainViewModel(val database: ApplensDatabaseDao, application: Application):
     // TODO: Implement the ViewModel
     private var viewModelJob = Job()
 
-
-
+    var alltickets = database.getAllTickets()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
 
@@ -29,7 +28,7 @@ class MainViewModel(val database: ApplensDatabaseDao, application: Application):
     private suspend fun getTickets() {
         withContext(Dispatchers.IO) {
 
-            var alltickets = database.getAllTickets()
+
 
         }
 

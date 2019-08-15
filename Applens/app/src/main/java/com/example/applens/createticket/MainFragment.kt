@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.example.applens.Database.ApplensDatabase
 
 import com.example.applens.databinding.FirstPageBinding
@@ -38,6 +39,10 @@ class MainFragment : Fragment() {
 
     private lateinit var button: Button
 
+    private lateinit var recyclerView: RecyclerView
+
+
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -46,6 +51,7 @@ class MainFragment : Fragment() {
 
         calendarView = view.findViewById(R.id.calendarView1)
         button = view.findViewById(R.id.fab)
+        recyclerView = view.findViewById(R.id.recyclerView_ticketlist)
 
 
         val application = requireNotNull(this.activity).application
@@ -126,12 +132,13 @@ class MainFragment : Fragment() {
 
         }
 
-        //val adapter = TicketlistAdapter()
-       // binding.recyclerViewTicketlist.adapter = adapter
+        val adapter = TicketlistAdapter()
+        recyclerView.adapter = adapter
 
-        //mainViewModel.alltickets.observe(viewLifecycleOwner, Observer { it?.let { adapter.data = it } })
+        mainViewModel.alltickets.observe(viewLifecycleOwner, Observer {
+            it?.let { adapter.data = it } })
 
-        //work on recycler view
+
 
 
 

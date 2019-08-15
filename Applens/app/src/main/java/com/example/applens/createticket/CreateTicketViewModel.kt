@@ -14,8 +14,8 @@ class CreateTicketViewModel(val database: ApplensDatabaseDao,application: Applic
 
     private var viewModelJob = Job()
 
-    //private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private val uiScope = CoroutineScope(Dispatchers.Main )
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+
 
     //private var ticket = MutableLiveData<Ticket?>()
 
@@ -28,10 +28,10 @@ class CreateTicketViewModel(val database: ApplensDatabaseDao,application: Applic
 
 
 
-    fun onCreateclick(id: String, desc: String) {
+    fun onCreateclick(new_ticket:CreateTicketFragment.MyTicket) {
         uiScope.launch {
 
-            var ticket = Ticket(id,desc)
+            var ticket = Ticket(new_ticket.id,new_ticket.desc,new_ticket.status,new_ticket.tik_type,new_ticket.projectname,new_ticket.priority,new_ticket.application_name)
             insert(ticket)
 
 

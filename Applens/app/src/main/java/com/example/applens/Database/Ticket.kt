@@ -11,6 +11,23 @@ data class Ticket(
     var ticket_Id: String ,
 
     @ColumnInfo(name = "ticketDesc")
-    val ticket_Desc: String
+    val ticket_Desc: String,
+
+    @ColumnInfo(name = "ticketStatus")
+    val ticket_Status: String,
+
+    @ColumnInfo(name = "ticketType")
+    val ticket_Type: String,
+
+    @ColumnInfo(name = "projectName")
+    val projectName: String,
+
+    @ColumnInfo(name = "ticketPriority")
+    val ticket_Priority: String,
+
+    @ColumnInfo(name = "application")
+    val application: String
+
+
 
 )

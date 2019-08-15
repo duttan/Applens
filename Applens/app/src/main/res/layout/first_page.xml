@@ -48,7 +48,8 @@
                     android:background="@color/colorApplensgrey"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginRight="4dp"/>
+                    android:layout_marginRight="4dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
             <View
                     android:layout_width="275dp"
                     android:layout_height="1dp"
@@ -74,7 +75,7 @@
             <TextView
                     android:id="@+id/effortlogged"
                     android:layout_width="143dp"
-                    android:layout_height="23dp"
+                    android:layout_height="wrap_content"
                     android:hint="Effort logged :"
                     android:textColorHint="#ffffff"
                     android:textColor="#FFFFFF"
