@@ -3,8 +3,12 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorWhite">#ffffff</color>
+    <color name="colorWhite">#FFFFFF</color>
     <color name="colorGrey">#3B4047</color>
+    <color name="colorApplensgreen">#188034</color>
+    <color name="colorApplensgrey">#2a2b2b</color>
+    <color name="colorhalfwhite">#d5dbdb</color>
+    <color name="colorApplensblue">#2b6485</color>
 
 
 </resources>

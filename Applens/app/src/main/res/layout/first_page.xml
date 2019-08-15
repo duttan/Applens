@@ -20,92 +20,95 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#3B4047"
+                android:background="@color/colorApplensgrey"
                 android:layout_marginTop="50dp">
+
+            <devs.mulham.horizontalcalendar.HorizontalCalendarView
+                    android:id="@+id/calendarView1"
+                    android:layout_width="match_parent"
+                    android:background="@color/colorWhite"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    app:selectedDateBackground="@color/colorApplensblue"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView_ticketlist"
-                    android:layout_width="398dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="#3B4047"
+                    android:layout_width="match_parent"
+                    android:layout_height="441dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@color/colorApplensgrey"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.666"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/submitbutton"/>
+                    android:layout_marginRight="4dp"/>
             <View
                     android:layout_width="275dp"
                     android:layout_height="1dp"
-                    android:background="@android:color/darker_gray"
+                    android:background="@color/colorWhite"
                     android:id="@+id/view"
-                    app:layout_constraintTop_toBottomOf="@+id/datepicker" android:layout_marginTop="20dp"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"/>
-
-            <EditText
-                    android:id="@+id/datepicker"
-                    android:layout_width="177dp"
-                    android:layout_height="39dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:ems="10"
-                    android:hint="July 15 Thursday"
-                    android:inputType="date"
-                    android:textColorHint="#ffffff"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginEnd="8dp" app:layout_constraintEnd_toStartOf="@+id/effortlogged"
-                    android:layout_marginRight="8dp" android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/effortlogged"
+                    android:layout_marginTop="3dp"/>
 
             <Button
                     android:id="@+id/submitbutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginRight="32dp"
                     android:text="Submit"
                     style="@style/RoundedButton"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@+id/view"
-                    app:layout_constraintTop_toTopOf="@+id/view"/>
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="16dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView5" android:layout_marginTop="28dp"
+                    app:layout_constraintTop_toTopOf="@+id/effortlogged" app:layout_constraintVertical_bias="0.558"
+                    android:textStyle="bold"/>
 
             <TextView
                     android:id="@+id/effortlogged"
-                    android:layout_width="103dp"
-                    android:layout_height="27dp"
+                    android:layout_width="143dp"
+                    android:layout_height="23dp"
                     android:hint="Effort logged :"
                     android:textColorHint="#ffffff"
-
-                    app:layout_constraintEnd_toStartOf="@+id/effort_display"
-                    android:layout_marginRight="12dp" android:layout_marginEnd="12dp"
-                    app:layout_constraintBottom_toTopOf="@+id/recyclerView_ticketlist"
-                    android:layout_marginBottom="76dp"/>
+                    android:textColor="#FFFFFF"
+                    android:text="Effort logged today:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="16dp" android:layout_marginStart="16dp"
+                    app:layout_constraintTop_toTopOf="@+id/calendarView1" android:layout_marginTop="100dp"
+                    app:fontFamily="sans-serif-medium"/>
 
             <TextView
                     android:id="@+id/effort_display"
                     android:layout_width="55dp"
                     android:layout_height="27dp"
                     android:text="8:00"
-                    android:textColor="#ffffff"
+                    android:textColor="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="@+id/effortlogged"
-                    app:layout_constraintTop_toTopOf="@+id/effortlogged" app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="24dp" android:layout_marginRight="24dp"
-                    app:layout_constraintVertical_bias="0.0"/>
+                    app:layout_constraintTop_toTopOf="@+id/effortlogged"
+                    app:layout_constraintVertical_bias="0.0" app:layout_constraintStart_toEndOf="@+id/effortlogged"
+                    android:layout_marginLeft="1dp" android:layout_marginStart="1dp"/>
             <TextView
                     android:text="Available Tickets:"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView5" android:textColor="#E5E5E5"
-                    android:layout_marginBottom="20dp"
-                    app:layout_constraintBottom_toTopOf="@+id/recyclerView_ticketlist"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="24dp"
-                    android:layout_marginStart="24dp" android:textSize="18sp"/>
+                    android:id="@+id/textView5" android:textColor="#FFFBFB"
+                    android:textSize="18sp"
+                    android:textStyle="bold" android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/recyclerView_ticketlist" android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
+                    android:layout_marginTop="24dp" app:layout_constraintTop_toBottomOf="@+id/effortlogged"
+                    app:layout_constraintVertical_bias="0.875" app:fontFamily="sans-serif-medium"/>
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <Button
                     android:id="@+id/fab"
+                    style="@style/RoundedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|end"
@@ -114,7 +117,8 @@
                     android:layout_marginEnd="32dp"
                     app:layout_constraintEnd_toEndOf="@+id/recyclerView_ticketlist" android:layout_marginRight="32dp"
                     android:layout_marginBottom="32dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/recyclerView_ticketlist"/>
+                    app:layout_constraintBottom_toBottomOf="@+id/recyclerView_ticketlist"
+                    android:text="  +   Create Ticket  " android:textStyle="bold"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

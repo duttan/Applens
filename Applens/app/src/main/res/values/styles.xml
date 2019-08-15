@@ -3,8 +3,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorApplensgrey</item>
+        <item name="colorPrimary">@color/colorApplensgreen</item>
         <item name="colorAccent">@color/colorAccent</item>
 
     </style>
@@ -20,11 +20,23 @@
         <item name="android:textAppearance">@style/BtnGreyText</item>
     </style>
 
+    <style name="RoundedButton.Grey" parent="Base.Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/dark_material</item>
+        <item name="android:textAppearance">@style/BtnWhiteText</item>
+    </style>
+
 
     <style name="BtnGreyText" >
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/colorGrey</item>
+
+    </style>
+
+    <style name="BtnWhiteText" >
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/colorWhite</item>
 
     </style>
 

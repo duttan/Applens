@@ -10,8 +10,12 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import android.widget.Button
+import androidx.fragment.app.Fragment
 import com.example.applens.createticket.CreateTicketFragment
 import com.example.applens.createticket.MainFragment
+import com.example.applens.nonDelivery.Nondelivery
+import com.example.applens.searchTicket.Search
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -20,16 +24,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
+
+
+       val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         supportFragmentManager.beginTransaction().add(R.id.base_layout,MainFragment(),"").commit()
 
-
-//        val fab: FloatingActionButton = findViewById(R.id.fab)
+//        val fab: Button = findViewById(R.id.fab)
 //        fab.setOnClickListener {
 //            supportFragmentManager.beginTransaction().add(R.id.root_layout,CreateTicketFragment(),"").commit()
 //        }
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
@@ -69,18 +75,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_home -> {
-                // Handle the camera action
+            R.id.nav_search_ticket -> {
+
+                val searchFragment:Fragment = Search.newInstance()
+                val transaction = supportFragmentManager!!.beginTransaction()
+                transaction.replace(R.id.root_layout,searchFragment).addToBackStack(null).commit()
             }
-            R.id.nav_gallery -> {
+
+            R.id.nav_add_non_delivery_activity -> {
+
+                val nonDFragment:Fragment = Nondelivery.newInstance()
+                val transaction = supportFragmentManager!!.beginTransaction()
+                transaction.replace(R.id.root_layout,nonDFragment).addToBackStack(null).commit()
 
             }
-            R.id.nav_slideshow -> {
 
-            }
-            R.id.nav_tools -> {
-
-            }
             R.id.nav_share -> {
 
             }

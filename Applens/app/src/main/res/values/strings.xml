@@ -13,6 +13,9 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="search_ticket">Search ticket</string>
+    <string name="add_non_delivery_activity">Add Non-delivery activity</string>
+    <string name="communicate">Communicate</string>
 
     <string-array name="spinner_status_entries">
         <item>Open</item>
@@ -24,6 +27,11 @@
     <string-array name="spinner_service_entries">
         <item>Incident Resoluion Unknown Sevices</item>
         <item>Operational Change Management Services</item>
+    </string-array>
+
+    <string-array name="spinner_application_entries">
+        <item>Huggies Rewards</item>
+        <item>Pampers Rewards</item>
     </string-array>
     <string-array name="spinner_activity_entries">
         <item>Ticket recording</item>
