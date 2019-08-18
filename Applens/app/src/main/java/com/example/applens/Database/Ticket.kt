@@ -3,12 +3,13 @@ package com.example.applens.Database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.*
 
 @Entity(tableName = "ticket_table")
 data class Ticket(
 
     @PrimaryKey
-    var ticket_Id: String ,
+    var ticket_Id: String,
 
     @ColumnInfo(name = "ticketDesc")
     val ticket_Desc: String,
@@ -26,7 +27,17 @@ data class Ticket(
     val ticket_Priority: String,
 
     @ColumnInfo(name = "application")
-    val application: String
+    val application: String,
+
+    @ColumnInfo(name = "ticketOpenDate")
+    val ticket_openDate: String,
+
+    @ColumnInfo(name = "ticketCloseDate")
+    val ticket_closeDate: String
+
+
+
+
 
 
 

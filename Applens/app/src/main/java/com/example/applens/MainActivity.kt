@@ -1,6 +1,7 @@
 package com.example.applens
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -15,15 +16,30 @@ import androidx.fragment.app.Fragment
 import com.example.applens.createticket.CreateTicketFragment
 import com.example.applens.createticket.MainFragment
 import com.example.applens.nonDelivery.Nondelivery
+import com.example.applens.pushnotification.NotificationUtils
 import com.example.applens.searchTicket.Search
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private val mNotificationTime = Calendar.getInstance().timeInMillis + 5000 //Set after 5 seconds from the current time.
+
+    private var mNotified = false
+
+
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        if (!mNotified) {
+            NotificationUtils().setNotification(mNotificationTime, this@MainActivity)
+        }
 
 
        val toolbar: Toolbar = findViewById(R.id.toolbar)

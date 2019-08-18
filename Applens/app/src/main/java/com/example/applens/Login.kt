@@ -37,7 +37,7 @@ class Login: AppCompatActivity()
 
     private fun validate(user:String,pass:String)
     {
-        if ((user.equals("666299")) && (pass.equals("password"))) {
+        if ((user.equals("q")) && (pass.equals("a"))) {
             val changepage = Intent(this, MainActivity::class.java)
             startActivity(changepage)
             finish()

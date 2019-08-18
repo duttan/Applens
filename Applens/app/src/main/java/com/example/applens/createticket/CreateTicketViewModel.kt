@@ -8,9 +8,12 @@ import androidx.lifecycle.MutableLiveData
 import com.example.applens.Database.ApplensDatabaseDao
 import com.example.applens.Database.Ticket
 import kotlinx.coroutines.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CreateTicketViewModel(val database: ApplensDatabaseDao,application: Application): AndroidViewModel(application)
 {
+
 
     private var viewModelJob = Job()
 
@@ -28,10 +31,12 @@ class CreateTicketViewModel(val database: ApplensDatabaseDao,application: Applic
 
 
 
+
+
     fun onCreateclick(new_ticket:CreateTicketFragment.MyTicket) {
         uiScope.launch {
 
-            var ticket = Ticket(new_ticket.id,new_ticket.desc,new_ticket.status,new_ticket.tik_type,new_ticket.projectname,new_ticket.priority,new_ticket.application_name)
+            var ticket = Ticket(new_ticket.id,new_ticket.desc,new_ticket.status,new_ticket.tik_type,new_ticket.projectname,new_ticket.priority,new_ticket.application_name,new_ticket.openDate,new_ticket.closeDate)
             insert(ticket)
 
 
@@ -45,7 +50,7 @@ class CreateTicketViewModel(val database: ApplensDatabaseDao,application: Applic
         withContext(Dispatchers.IO) {
             database.insert(ticket)
 
-            var alltickets = database.getAllTickets()
+            //var alltickets = database.getAllTickets()
 
 
         }
