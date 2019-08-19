@@ -33,7 +33,8 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), TicketlistAdapter.ViewHolder.RecyclerViewItemClickListener {
+
 
 
     private lateinit var viewModel: MainViewModel
@@ -66,9 +67,6 @@ class MainFragment : Fragment() {
 
 
         val application = requireNotNull(this.activity).application
-
-
-
         val dataSource = ApplensDatabase.getInstance(application).applensDatabaseDao
         val viewModelFactory = MainViewModelFactory(dataSource,application)
         val mainViewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
@@ -104,6 +102,9 @@ class MainFragment : Fragment() {
             .end()          // ends configuration.
             .defaultSelectedDate(today)
             .build()
+
+        var immediate = true
+        horizontalCalendar.goToday(immediate)
 
         horizontalCalendar.calendarListener = object : HorizontalCalendarListener() {
             override fun onDateSelected(date: Calendar, position: Int) {
@@ -153,6 +154,7 @@ class MainFragment : Fragment() {
             }
         }
 
+
         horizontalCalendar.refresh()
 
 
@@ -173,6 +175,14 @@ class MainFragment : Fragment() {
 
 
         return view
+    }
+
+    override fun onItemLongClick(view: View, position: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onItemClick(view: View, position: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 

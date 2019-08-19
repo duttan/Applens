@@ -14,9 +14,7 @@ import com.example.applens.databinding.AddTicketBinding
 import kotlinx.android.synthetic.main.add_ticket.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+
 import java.util.*
 
 

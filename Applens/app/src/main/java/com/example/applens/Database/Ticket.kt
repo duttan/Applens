@@ -33,7 +33,16 @@ data class Ticket(
     val ticket_openDate: String,
 
     @ColumnInfo(name = "ticketCloseDate")
-    val ticket_closeDate: String
+    val ticket_closeDate: String,
+
+    @ColumnInfo(name = "ticketService")
+    val ticket_Service: String = "",
+
+    @ColumnInfo(name = "ticketActivity")
+    val ticket_Activity: String = "",
+
+    @ColumnInfo(name = "ticketEffort")
+    val ticket_Effort: Int = 0)
 
 
 
@@ -41,4 +50,4 @@ data class Ticket(
 
 
 
-)
+

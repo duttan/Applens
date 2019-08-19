@@ -18,11 +18,21 @@ interface ApplensDatabaseDao {
     fun getAllTickets(): LiveData<List<Ticket>>
 
 
-    @Query("SELECT * from ticket_table WHERE strftime('%Y/%m/%d',ticketOpenDate) <= strftime('%Y/%m/%d',:key) and strftime('%Y/%m/%d',ticketCloseDate) >= strftime('%Y/%m/%d',:key)")
+    @Query("SELECT * from ticket_table WHERE strftime('%Y/%m/%d',ticketOpenDate) <= strftime('%Y/%m/%d',:key) and strftime('%Y/%m/%d',ticketCloseDate) >= strftime('%Y/%m/%d',:key) and ticketStatus = 'Open'")
     fun get(key: String): LiveData<List<Ticket>>
 
+    @Query("SELECT * from ticket_table WHERE application = :key1" )
+    fun getAllTickets11(key1: String): LiveData<List<Ticket>>
 
-    // SELECT * from ticket_table WHERE strftime('%Y/%m/%d',ticketOpenDate) <= strftime('%Y/%m/%d','2019-08-20') and strftime('%Y/%m/%d',ticketCloseDate) >= strftime('%Y/%m/%d','2019-08-20')
+    @Query("SELECT * from ticket_table WHERE ticketActivity = :key1 ")
+    fun getAllTickets12(key1: String): LiveData<List<Ticket>>
+
+    @Query("SELECT * from ticket_table WHERE application = :key1 and ticketActivity = :key2")
+    fun getAllTickets2(key1: String, key2: String): LiveData<List<Ticket>>
+
+    @Query("SELECT * from ticket_table WHERE ticket_Id = :key1 or ticketStatus = :key2")
+    fun getAllTickets3(key1: String, key2: String): LiveData<List<Ticket>>
+
 
 
 }

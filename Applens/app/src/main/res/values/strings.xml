@@ -58,6 +58,26 @@
     </string-array>
 
 
+
+    <string-array name="spinner_application_entries_search">
+        <item>Huggies Rewards</item>
+        <item>Pampers Rewards</item>
+        <item>Not sure</item>
+    </string-array>
+    <string-array name="spinner_activity_entries_search">
+        <item>Ticket recording</item>
+        <item>Incident Reporting</item>
+        <item>Documentation</item>
+        <item>KEDB Update</item>
+        <item>Others</item>
+        <item>Not sure</item>
+    </string-array>
+
+
+
+
+
+
     <string name="notification">New Notification</string>
     <string name="notification_channel_description">This is a sample notification channel for demonstration purpose.</string>
 
