@@ -2,10 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
+        xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
 
 
     <androidx.cardview.widget.CardView
@@ -15,9 +14,9 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="5dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="3dp"
             app:cardBackgroundColor="@color/colorWhite"
-            app:cardCornerRadius="15dp"
+            app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,30 +27,48 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="14dp"
+                      android:text="Ticket ID:" android:textSize="12sp"
+                      app:layout_constraintStart_toStartOf="@+id/ticket_id"
+                      app:layout_constraintEnd_toEndOf="@+id/ticket_id" app:layout_constraintHorizontal_bias="0.0"
+                      android:textColor="#413B3B" android:textStyle="bold"
+                      app:layout_constraintBottom_toTopOf="@+id/ticket_id" android:layout_marginBottom="3dp"/>
+
+
             <EditText
                     android:id="@+id/ticket_id"
                     android:layout_width="160dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="24dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:hint="ID"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Status:"
+                      android:textSize="12sp" android:textColor="#F84B4040" android:textStyle="bold"
+                      app:layout_constraintStart_toStartOf="@+id/spinner_status"
+                      app:layout_constraintEnd_toEndOf="@+id/spinner_status"
+                      app:layout_constraintHorizontal_bias="0.0"
+                      app:layout_constraintBottom_toTopOf="@+id/spinner_status" android:layout_marginBottom="3dp"/>
+
             <Spinner
                     android:id="@+id/spinner_status"
                     android:entries="@array/spinner_status_entries"
                     android:layout_width="160dp"
                     android:layout_height="39dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ticket_id" android:layout_marginLeft="16dp"
-                    android:layout_marginStart="16dp" app:layout_constraintHorizontal_bias="1.0"
+                    android:layout_marginStart="16dp" app:layout_constraintHorizontal_bias="0.97"
                     app:layout_constraintTop_toTopOf="parent"/>
 
             <Spinner
