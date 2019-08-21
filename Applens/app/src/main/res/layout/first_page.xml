@@ -84,7 +84,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginLeft="16dp" android:layout_marginStart="16dp"
                     app:layout_constraintTop_toTopOf="@+id/calendarView1" android:layout_marginTop="100dp"
-                    app:fontFamily="sans-serif-medium"/>
+                    app:fontFamily="sans-serif-medium" android:textStyle="bold"/>
 
             <TextView
                     android:id="@+id/effort_display"
@@ -100,13 +100,16 @@
                     android:text="Available Tickets:"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView5" android:textColor="#FFFBFB"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    android:id="@+id/textView5"
+                    android:textColor="#FFFBFB"
+                    android:textSize="14sp"
                     android:layout_marginStart="16dp"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
-                    android:layout_marginTop="24dp" app:layout_constraintTop_toBottomOf="@+id/effortlogged"
-                    app:fontFamily="sans-serif-medium" android:layout_marginBottom="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintTop_toBottomOf="@+id/effortlogged"
+                    app:fontFamily="sans-serif-medium"
+                    android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toTopOf="@+id/recyclerView_ticketlist"/>
 
             <Button

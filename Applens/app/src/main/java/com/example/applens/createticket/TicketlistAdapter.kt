@@ -15,8 +15,6 @@ import com.example.applens.R
 class TicketlistAdapter: RecyclerView.Adapter<TicketlistAdapter.ViewHolder>() {
 
 
-
-
     var data =  listOf<Ticket>()
         set(value) {
             field = value
@@ -49,7 +47,7 @@ class TicketlistAdapter: RecyclerView.Adapter<TicketlistAdapter.ViewHolder>() {
         val ticketactivity: Spinner = itemView.findViewById(R.id.spinner_activity)
         val img:ImageView = itemView.findViewById(R.id.counter_img1)
         val effort:TextView = itemView.findViewById(R.id.effort_log)
-        val save:TextView = itemView.findViewById(R.id.save_button)
+       // val save:TextView = itemView.findViewById(R.id.save_button)
 
 
 
@@ -63,16 +61,16 @@ class TicketlistAdapter: RecyclerView.Adapter<TicketlistAdapter.ViewHolder>() {
                 effort.text = count++.toString()+ " Hrs"
             }
 
-            save.setOnClickListener {
-
-
-
-                ticketservice.selectedItem.toString()
-                ticketactivity.selectedItem.toString()
-
-
-
-            }
+//            save.setOnClickListener {
+//
+//
+//
+//                ticketservice.selectedItem.toString()
+//                ticketactivity.selectedItem.toString()
+//
+//
+//
+//            }
 
 
 

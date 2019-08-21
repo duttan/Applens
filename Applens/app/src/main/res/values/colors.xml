@@ -9,6 +9,7 @@
     <color name="colorApplensgrey">#2a2b2b</color>
     <color name="colorhalfwhite">#d5dbdb</color>
     <color name="colorApplensblue">#2b6485</color>
+    <color name="cardbackground">#d8d9d2</color>
 
 
 </resources>
