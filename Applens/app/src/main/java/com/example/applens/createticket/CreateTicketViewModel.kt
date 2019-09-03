@@ -24,7 +24,7 @@ class CreateTicketViewModel(val database: ApplensDatabaseDao,application: Applic
 
     //private var alltickets = MutableLiveData<List<Ticket?>>()
 
-   // private val tickets = database.getAllTickets()
+    // private val tickets = database.getAllTickets()
 
 
 

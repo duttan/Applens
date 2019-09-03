@@ -35,6 +35,8 @@ class Login: AppCompatActivity()
     }
 
 
+
+
     private fun validate(user:String,pass:String)
     {
         if ((user.equals("q")) && (pass.equals("a"))) {

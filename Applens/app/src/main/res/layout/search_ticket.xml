@@ -177,7 +177,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searching_button"
     />
-
+    <TextView
+            android:text="Search Results:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView24" android:textColor="@color/colorWhite"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp" android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView_searchlist"
+            app:layout_constraintTop_toBottomOf="@+id/view"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

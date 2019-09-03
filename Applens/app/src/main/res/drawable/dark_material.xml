@@ -11,7 +11,7 @@
         <item android:state_enabled="false">
             <shape android:shape="rectangle">
                 <corners android:radius="32dp" />
-                <solid android:color="@color/colorApplensgrey"/>
+                <solid android:color="@color/colorGrey"/>
                 <padding android:left="@dimen/abc_button_padding_horizontal_material"
                          android:top="@dimen/abc_button_padding_vertical_material"
                          android:right="@dimen/abc_button_padding_horizontal_material"
@@ -21,7 +21,7 @@
         <item>
             <shape android:shape="rectangle">
                 <corners android:radius="32dp"/>
-                <solid android:color="@color/colorApplensgrey"/>
+                <solid android:color="@color/colorGrey"/>
                 <padding android:left="@dimen/abc_button_padding_horizontal_material"
                          android:top="@dimen/abc_button_padding_vertical_material"
                          android:right="@dimen/abc_button_padding_horizontal_material"

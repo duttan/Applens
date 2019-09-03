@@ -112,6 +112,7 @@
 
                 <ImageView
                         android:id="@+id/counter_img1"
+                        android:tint="@color/colorApplensgreen"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -130,11 +131,12 @@
                         android:layout_marginBottom="18dp"
                 />
                 <ImageView
+                        android:tint="@color/colorApplensgreen"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/baseline_remove_circle_black_24"
-                        android:id="@+id/imageView3"/>
+                        android:id="@+id/counter_img2"/>
 
             </LinearLayout>
             <TextView

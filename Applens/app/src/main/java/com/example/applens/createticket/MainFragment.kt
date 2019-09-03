@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.applens.Database.ApplensDatabase
+import com.example.applens.Database.Ticket
 
 import com.example.applens.databinding.FirstPageBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -33,7 +34,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 
-class MainFragment : Fragment(), TicketlistAdapter.ViewHolder.RecyclerViewItemClickListener {
+class MainFragment : Fragment() {
 
 
 
@@ -47,8 +48,7 @@ class MainFragment : Fragment(), TicketlistAdapter.ViewHolder.RecyclerViewItemCl
 
     private lateinit var sendval: String
 
-
-
+    private lateinit var submitbutton:Button
 
 
 
@@ -61,6 +61,9 @@ class MainFragment : Fragment(), TicketlistAdapter.ViewHolder.RecyclerViewItemCl
         calendarView = view.run { findViewById(R.id.calendarView1) }
         button = view.run { findViewById(R.id.fab) }
         recyclerView = view.findViewById(R.id.recyclerView_ticketlist)
+        submitbutton = view.findViewById(R.id.submitbutton)
+
+        submitbutton.isEnabled = false
 
         var formatter = SimpleDateFormat("YYYY-MM-dd")
 
@@ -80,14 +83,12 @@ class MainFragment : Fragment(), TicketlistAdapter.ViewHolder.RecyclerViewItemCl
         endDate.add(Calendar.MONTH, 1)
 
         val today = Calendar.getInstance()
-        today.add(Calendar.DAY_OF_MONTH,1)
-
-
+        today.add(Calendar.DAY_OF_MONTH,0)
 
 
 
         val horizontalCalendar = HorizontalCalendar.Builder(view, R.id.calendarView1)
-            .range(today, endDate)
+            .range(startDate, today)
             .datesNumberOnScreen(5)
             .configure()    // starts configuration.
             .formatTopText("MM")       // default to "MMM".
@@ -103,26 +104,33 @@ class MainFragment : Fragment(), TicketlistAdapter.ViewHolder.RecyclerViewItemCl
             .defaultSelectedDate(today)
             .build()
 
+        Log.i("@@",today.time.toString())
+
         var immediate = true
         horizontalCalendar.goToday(immediate)
+
+        val adapter = TicketlistAdapter(activity!!.applicationContext,mainViewModel)
+
+
+
+
+
 
         horizontalCalendar.calendarListener = object : HorizontalCalendarListener() {
             override fun onDateSelected(date: Calendar, position: Int) {
                 date.add(Calendar.DAY_OF_MONTH,1)
 
-                val adapter = TicketlistAdapter()
-               // mainViewModel.retriveTickets(formatter.format(date.time).toString())
-
-                var longi = endDate.timeInMillis - today.timeInMillis
-                val difff:Long = TimeUnit.MILLISECONDS.toDays(longi)
-
-
                 sendval = formatter.format(date.time).toString()
-              //  Log.i("@@",sendval)
+
+                // adapter.setEfforts(mainViewModel.getTicketsForDate(sendval))
+
 
                 mainViewModel.retriveTickets(formatter.format(date.time).toString()).observe(viewLifecycleOwner, Observer {
                     it?.let {
                         adapter.data = it
+
+                        mainViewModel.firstEffortLog(it,sendval)
+
 
                         for(item in it) {
                             Log.i("@@", item.toString())
@@ -157,8 +165,10 @@ class MainFragment : Fragment(), TicketlistAdapter.ViewHolder.RecyclerViewItemCl
 
         horizontalCalendar.refresh()
 
+        submitbutton.setOnClickListener {
 
-
+            mainViewModel.bulkInsertUpdateEfforts(adapter.getUpdatedEfforts())
+        }
 
 
         button.setOnClickListener {
@@ -177,13 +187,7 @@ class MainFragment : Fragment(), TicketlistAdapter.ViewHolder.RecyclerViewItemCl
         return view
     }
 
-    override fun onItemLongClick(view: View, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
-    override fun onItemClick(view: View, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
 
 

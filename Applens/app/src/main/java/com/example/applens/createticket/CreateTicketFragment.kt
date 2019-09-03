@@ -12,6 +12,7 @@ import com.example.applens.Database.ApplensDatabase
 import com.example.applens.R
 import com.example.applens.databinding.AddTicketBinding
 import kotlinx.android.synthetic.main.add_ticket.*
+import java.lang.Exception
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
@@ -33,10 +34,18 @@ class CreateTicketFragment: Fragment()
                         var openDate: String,
                         var closeDate: String)
 
+    var datevalue = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val datevalue = arguments!!.getString("MyDateKey")
+        try{
+             datevalue = arguments!!.getString("MyDateKey")
+        }catch(e: Exception){
+
+
+        }
+
+
 
         var formatter = SimpleDateFormat("YYYY-MM-dd")
         val binding: AddTicketBinding = DataBindingUtil.inflate(inflater, R.layout.add_ticket, container, false)
@@ -84,7 +93,7 @@ class CreateTicketFragment: Fragment()
 
           //  createTicketViewModel.onCreateclick(binding.ticketId.text.toString(),binding.ticketDesc.text.toString()) }
 
-        binding.opendate.text = "OpenDate: "+datevalue.toString()
+        binding.opendate.text = "OpenDate: "+ datevalue.toString()
         binding.closeButton.setOnClickListener { activity!!.onBackPressed(); }
 
         binding.setLifecycleOwner(this)

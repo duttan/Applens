@@ -12,13 +12,15 @@ import androidx.room.RoomDatabase
  * This pattern is pretty much the same for any database,
  * so you can reuse it.
  */
-@Database(entities = [Ticket::class], version = 6, exportSchema = false)
+@Database(entities = [Ticket::class, TimeSheet::class], version = 18, exportSchema = false)
 abstract class ApplensDatabase : RoomDatabase() {
 
     /**
      * Connects the database to the DAO.
      */
     abstract val applensDatabaseDao: ApplensDatabaseDao
+
+    abstract val timesheetDao: TimesheetDao
 
     /**
      * Define a companion object, this allows us to add functions on the SleepDatabase class.
