@@ -6,6 +6,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import com.example.applens.createticket.Efforts
 import java.util.*
 
 @Dao
@@ -20,7 +21,12 @@ interface ApplensDatabaseDao {
 
 
     @Query("SELECT * from ticket_table WHERE strftime('%Y/%m/%d',ticketOpenDate) <= strftime('%Y/%m/%d',:key) and strftime('%Y/%m/%d',ticketCloseDate) >= strftime('%Y/%m/%d',:key) and ticketStatus != 'Closed'")
-    fun get(key: String): LiveData<List<Ticket>>
+    fun getTickets(key: String): LiveData<List<Ticket>>
+
+    @Query("select t1.ticket_Id,t1.ticketDesc,t2.TimeSheetID, t2.Logged_efforts ,t2.statusID,t2.effortDate,t2.serviceID,t2.activityID from Ticket_Table t1 left join timesheet_table t2 on t1.ticket_Id =t2.ticketID and t2.effortDate= :key WHERE strftime('%Y/%m/%d',t1.ticketOpenDate) <= strftime('%Y/%m/%d',t2.effortDate) and strftime('%Y/%m/%d',t1.ticketCloseDate) >= strftime('%Y/%m/%d',t2.effortDate) and t1.ticketStatus != 'Closed'")
+    fun get(key: String): LiveData<List<Efforts>>
+
+
 
     @Query("SELECT * from ticket_table WHERE application = :key1" )
     fun getAllTickets11(key1: String): LiveData<List<Ticket>>

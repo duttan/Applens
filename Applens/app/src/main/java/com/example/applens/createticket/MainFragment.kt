@@ -32,6 +32,7 @@ import java.time.Duration
 import java.time.LocalDateTime
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.concurrent.schedule
 
 
 class MainFragment : Fragment() {
@@ -111,7 +112,17 @@ class MainFragment : Fragment() {
 
         val adapter = TicketlistAdapter(activity!!.applicationContext,mainViewModel)
 
-
+//        var cache:List<Ticket> = emptyList()
+//
+//        fun setcache(tlist:List<Ticket>)
+//        {
+//            cache = tlist
+//        }
+//
+//        fun refresh()
+//        {
+//            mainViewModel.firstEffortLog(cache,sendval)
+//        }
 
 
 
@@ -124,13 +135,19 @@ class MainFragment : Fragment() {
 
                 // adapter.setEfforts(mainViewModel.getTicketsForDate(sendval))
 
-
                 mainViewModel.retriveTickets(formatter.format(date.time).toString()).observe(viewLifecycleOwner, Observer {
                     it?.let {
+                        mainViewModel.firstEffortLog(it, sendval)
+                    }
+
+                })
+
+
+
+
+                mainViewModel.retriveEfforts(formatter.format(date.time).toString()).observe(viewLifecycleOwner, Observer {
+                    it?.let {
                         adapter.data = it
-
-                        mainViewModel.firstEffortLog(it,sendval)
-
 
                         for(item in it) {
                             Log.i("@@", item.toString())
@@ -138,6 +155,7 @@ class MainFragment : Fragment() {
 
                         if (adapter.data.size > 0)
                         {
+
                             recyclerView.visibility = (View.VISIBLE)
                             empty_text.visibility = (View.INVISIBLE)
                         }
@@ -149,7 +167,6 @@ class MainFragment : Fragment() {
                     } })
 
                 recyclerView.adapter = adapter
-
             }
 
             override fun onCalendarScroll(calendarView: HorizontalCalendarView?, dx: Int, dy: Int)
@@ -167,7 +184,7 @@ class MainFragment : Fragment() {
 
         submitbutton.setOnClickListener {
 
-            mainViewModel.bulkInsertUpdateEfforts(adapter.getUpdatedEfforts())
+            //mainViewModel.bulkInsertUpdateEfforts(adapter.getUpdatedEfforts())
         }
 
 

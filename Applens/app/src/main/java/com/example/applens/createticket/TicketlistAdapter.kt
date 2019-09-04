@@ -20,7 +20,7 @@ class TicketlistAdapter internal constructor(context: Context, mainViewModel: Ma
      var efforts = emptyList<Efforts>()
      var count:Int = 0
 
-    var data =  listOf<Ticket>()
+    var data =  listOf<Efforts>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -44,9 +44,9 @@ class TicketlistAdapter internal constructor(context: Context, mainViewModel: Ma
 
         //holder.bind(item,position)
 
-        holder.ticketid.text = item.ticket_Id
-        holder.ticketdesc.text = item.ticket_Desc
-        holder.ticketstatus.setSelection(getIndex(holder.ticketstatus,item.ticket_Status))
+        holder.ticketid.text = item.TicketID
+        holder.ticketdesc.text = item.ticketDesc
+        holder.ticketstatus.setSelection(getIndex(holder.ticketstatus,item.StatusID))
 
 
         if(!efforts.isEmpty()) {
