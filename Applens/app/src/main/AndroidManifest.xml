@@ -26,6 +26,26 @@
             </intent-filter>
 
         </activity>
+        <activity android:name=".createticket.History">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+
+        </activity>
+
+
+        <activity android:name=".createticket.Popupactivity"
+                  android:theme="@style/Theme.AppCompat.Light.Dialog">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
 
         <activity android:name=".Login">
 
@@ -38,6 +58,7 @@
 
 
         <meta-data android:name="preloaded_fonts" android:resource="@array/preloaded_fonts"/>
+        <receiver android:name=".pushnotification.AlarmReceiver"/>
     </application>
 
 </manifest>

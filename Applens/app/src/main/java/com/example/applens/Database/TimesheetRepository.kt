@@ -1,9 +1,11 @@
 package com.example.applens.Database
 
+import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.applens.createticket.Efforts
+import com.example.applens.createticket.Report
 import kotlinx.coroutines.*
 import kotlin.Exception
 
@@ -11,7 +13,7 @@ import kotlin.Exception
 class TimesheetRepository(private val timesheetDao: TimesheetDao){
 
 
-    private lateinit var timeSheetsForDate: List<Efforts>
+    private var timeSheetsForDate: List<Efforts> = emptyList()
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
@@ -29,8 +31,27 @@ class TimesheetRepository(private val timesheetDao: TimesheetDao){
             }
             catch (e:Exception)
             {
-
                 // update1(eff,sta,ser,act,key)
+            }
+            return@launch
+        }
+
+
+
+
+    }
+
+    @Throws(Exception::class)
+    fun insertupdate1(timesheet: TimeSheet,eff:Int,sta:String,ser:String,act:String, key:String)   {
+
+
+        uiScope.launch {
+            try {
+                insertSheet(timesheet)
+            }
+            catch (e:Exception)
+            {
+                update1(eff,sta,ser,act,key)
             }
             return@launch
         }
@@ -84,6 +105,10 @@ class TimesheetRepository(private val timesheetDao: TimesheetDao){
 
 
 
+    fun fetchReport():List<Report>
+    {
+        return timesheetDao.getreport()
+    }
 
 
 
@@ -92,22 +117,26 @@ class TimesheetRepository(private val timesheetDao: TimesheetDao){
 
 
     fun getT(date: String): List<Efforts> {
-        uiScope.launch {
-            getTimeSheet(date)
+//        uiScope.launch {
+//            getTimeSheet(date)
+//        }
 
-        }
+        timeSheetsForDate = timesheetDao.getTimesheet(date)
         return timeSheetsForDate
+        Log.i("@@@",timeSheetsForDate.size.toString())
     }
 
 
-    suspend fun getTimeSheet(date: String) {
-        withContext(Dispatchers.IO) {
+//    suspend fun getTimeSheet(date: String) {
+//        withContext(Dispatchers.IO) {
+//
+//            timeSheetsForDate = timesheetDao.getTimesheet(date)
+//
+//        }
 
-            timeSheetsForDate = timesheetDao.getTimesheet(date)
-        }
 
 
-    }
+    //}
 
 
 }

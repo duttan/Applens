@@ -1,6 +1,7 @@
 package com.example.applens.createticket
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -46,10 +47,10 @@ class MainViewModel(val database: ApplensDatabaseDao, application: Application):
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    fun retriveEfforts(date_str: String): LiveData<List<Efforts>>{
+    fun retriveEfforts(date_str: String): List<Efforts>{
 
-        return timeSheetDao.getTimesheet1(date_str)
-       // return repoTimesheet.getT(date_str)
+       // return timeSheetDao.getTimesheet1(date_str)
+        return repoTimesheet.getT(date_str)
          }
 
     fun retriveTickets(date_str: String): LiveData<List<Ticket>>{
@@ -58,21 +59,21 @@ class MainViewModel(val database: ApplensDatabaseDao, application: Application):
 
 
 
-//
-//    fun bulkInsertUpdateEfforts(efforts:List<Efforts>) = uiScope.launch {
-//        for(effort in efforts) {
-//            try {
-//                var timeSheet = TimeSheet(effort.TicketID+"date1",effort.TicketID!!,effort.Logged_efforts,effort.StatusID!!,"date1",effort.serviceID!!,effort.activityID!!)
-//               // repoTimesheet.insert(timeSheet)
-//                }
-//
-//            catch (e: Exception ){
-//                var timeSheet = TimeSheet(effort.TimeSheetID,effort.TicketID!!,effort.Logged_efforts,effort.StatusID!!,"date1",effort.serviceID!!,effort.activityID!!)
-//                repoTimesheet.update(timeSheet)
-//            }
-//
-//        }
-//    }
+
+    fun bulkInsertUpdateEfforts(efforts:List<Efforts>,date_str: String) = uiScope.launch {
+        for(effort in efforts) {
+            try {
+                var timeSheet = TimeSheet(effort.ticket_Id+date_str,effort.ticket_Id!!,effort.Logged_efforts,effort.StatusID!!,date_str,effort.ServiceID!!,effort.ActivityID!!)
+                repoTimesheet.insertupdate1(timeSheet,effort.Logged_efforts,effort.StatusID,effort.ServiceID!!,effort.ActivityID!!,effort.ticket_Id+date_str)
+                }
+
+            catch (e: Exception ){
+                //var timeSheet = TimeSheet(effort.ticket_Id+date_str,effort.ticket_Id!!,effort.Logged_efforts,effort.StatusID!!,"date1",effort.ServiceID!!,effort.ActivityID!!)
+               // repoTimesheet.update(timeSheet)
+            }
+
+        }
+    }
 
     fun firstEffortLog(tickets: List<Ticket>,date_str: String) = uiScope.launch{
 
@@ -96,14 +97,26 @@ class MainViewModel(val database: ApplensDatabaseDao, application: Application):
         }
     }
 
+    fun getReportStatus():List<Report>{
+
+        return repoTimesheet.fetchReport()
+    }
+
 
 
 
 
 
     fun getTicketsForDate(date_str: String) : List<Efforts> {
-        return repoTimesheet.getT(date_str)
+        try {
+            return repoTimesheet.getT(date_str)
+        }
+        catch (e:java.lang.Exception)
+        {
+            Log.i("@@@",e.toString())
+        }
 
+        return repoTimesheet.getT(date_str)
     }
 
 

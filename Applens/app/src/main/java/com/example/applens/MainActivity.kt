@@ -1,5 +1,6 @@
 package com.example.applens
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -14,6 +15,7 @@ import android.view.Menu
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.applens.createticket.CreateTicketFragment
+import com.example.applens.createticket.History
 import com.example.applens.createticket.MainFragment
 import com.example.applens.nonDelivery.Nondelivery
 import com.example.applens.pushnotification.NotificationUtils
@@ -24,7 +26,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private val mNotificationTime = Calendar.getInstance().timeInMillis + 5000 //Set after 5 seconds from the current time.
+    private val mNotificationTime = Calendar.getInstance().timeInMillis + 20000 //Set after 5 seconds from the current time.
 
     private var mNotified = false
 
@@ -63,6 +65,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onBackPressed() {
+//        val count = supportFragmentManager.backStackEntryCount
+//
+//        if (count == 0) {
+//            super.onBackPressed()
+//            //additional code
+//        } else {
+//            supportFragmentManager.popBackStack()
+//        }
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
@@ -102,6 +113,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val nonDFragment:Fragment = Nondelivery.newInstance()
                 val transaction = supportFragmentManager!!.beginTransaction()
                 transaction.replace(R.id.root_layout,nonDFragment).addToBackStack(null).commit()
+
+            }
+
+            R.id.nav_history -> {
+
+                val changepage = Intent(this, History::class.java)
+                startActivity(changepage)
+
+            }
+
+            R.id.nav_logout -> {
+
+                val freshpage = Intent(this, Login::class.java)
+                startActivity(freshpage)
+                finish()
 
             }
 

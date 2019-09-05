@@ -16,8 +16,10 @@
     <string name="search_ticket">Search ticket</string>
     <string name="add_non_delivery_activity">Add Non-delivery activity</string>
     <string name="communicate">Communicate</string>
+    <string name="timesheet"> Timesheet History </string>
 
     <string-array name="spinner_status_entries">
+        <item>None</item>
         <item>Open</item>
         <item>Closed</item>
         <item>Pending Customer</item>
@@ -25,6 +27,7 @@
         <item>Work in Progress</item>
     </string-array>
     <string-array name="spinner_service_entries">
+        <item>None</item>
         <item>Incident Resoluion Unknown Sevices</item>
         <item>Operational Change Management Services</item>
     </string-array>
@@ -34,6 +37,7 @@
         <item>Pampers Rewards</item>
     </string-array>
     <string-array name="spinner_activity_entries">
+        <item>None</item>
         <item>Ticket recording</item>
         <item>Incident Reporting</item>
         <item>Documentation</item>

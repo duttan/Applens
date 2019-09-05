@@ -37,14 +37,14 @@ class TicketlistAdapter internal constructor(context: Context, mainViewModel: Ma
 
 
 
-    override fun getItemCount() = data.size
+    override fun getItemCount() = efforts.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = data[position]
+        val item = efforts[position]
 
         //holder.bind(item,position)
 
-        holder.ticketid.text = item.TicketID
+        holder.ticketid.text = item.ticket_Id
         holder.ticketdesc.text = item.ticketDesc
         holder.ticketstatus.setSelection(getIndex(holder.ticketstatus,item.StatusID))
 
@@ -63,24 +63,66 @@ class TicketlistAdapter internal constructor(context: Context, mainViewModel: Ma
             }
 
             if (current.StatusID != null) {
-                holder.ticketstatus.setSelection(getIndex(holder.ticketstatus, current.StatusID.toString()))
+                holder.ticketstatus.setSelection(getIndex(holder.ticketstatus, current.StatusID))
             }
+
+
+            holder.ticketservice.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                    current.ServiceID = holder.ticketservice.selectedItem.toString()
+//                tickets.get(position).statusID = listStatus.get(position)
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    Log.e("@@", "onNothingSelcted")
+                }
+            }
+            if (current.ServiceID != null) {
+                holder.ticketservice.setSelection(getIndex(holder.ticketservice, current.ServiceID!!))
+            }
+
+
+            holder.ticketactivity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                    current.ActivityID = holder.ticketactivity.selectedItem.toString()
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    Log.e("@@", "onNothingSelcted")
+                }
+            }
+            if (current.ActivityID != null) {
+                holder.ticketactivity.setSelection(getIndex(holder.ticketactivity, current.ActivityID!!))
+            }
+
+
+
+            holder.img_plus.setOnClickListener {
+                if(count < 8) {
+                    count+=1
+                    holder.effort.text = count.toString() + " Hrs"
+                    current.Logged_efforts = count
+
+                }
+            }
+
+            if(current.Logged_efforts!=0)
+            {
+                holder.effort.text = current.Logged_efforts.toString()+ " Hrs"
+            }
+
+            holder.img_minus.setOnClickListener {
+
+                if(count > 0) {
+                    count-=1
+                    holder.effort.text = count.toString() + " Hrs"
+                    current.Logged_efforts = count
+                }
+            }
+
         }
 
 
-        holder.img_plus.setOnClickListener {
-            if(count < 8) {
-                count+=1
-                holder.effort.text = count.toString() + " Hrs"
-            }
-        }
-        holder.img_minus.setOnClickListener {
-
-            if(count > 0) {
-                count-=1
-                holder.effort.text = count.toString() + " Hrs"
-            }
-        }
 
     }
 

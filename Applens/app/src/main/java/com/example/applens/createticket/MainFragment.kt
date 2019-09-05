@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -59,12 +60,14 @@ class MainFragment : Fragment() {
         val view = inflater.inflate(R.layout.first_page, container, false)
 
 
+
         calendarView = view.run { findViewById(R.id.calendarView1) }
         button = view.run { findViewById(R.id.fab) }
         recyclerView = view.findViewById(R.id.recyclerView_ticketlist)
         submitbutton = view.findViewById(R.id.submitbutton)
+        var effortdisplay = view.findViewById<TextView>(R.id.effort_display)
 
-        submitbutton.isEnabled = false
+        submitbutton.isEnabled = true
 
         var formatter = SimpleDateFormat("YYYY-MM-dd")
 
@@ -132,8 +135,9 @@ class MainFragment : Fragment() {
                 date.add(Calendar.DAY_OF_MONTH,1)
 
                 sendval = formatter.format(date.time).toString()
+                effortdisplay.text = "0 Hrs"
 
-                // adapter.setEfforts(mainViewModel.getTicketsForDate(sendval))
+
 
                 mainViewModel.retriveTickets(formatter.format(date.time).toString()).observe(viewLifecycleOwner, Observer {
                     it?.let {
@@ -142,31 +146,110 @@ class MainFragment : Fragment() {
 
                 })
 
+               for( item in mainViewModel.getReportStatus())
+               {
+                   if(item.EffortDate.equals(sendval))
+                   {
+                       effortdisplay.text = item.summedEfforts+" Hrs"
+                   }
+
+               }
 
 
 
-                mainViewModel.retriveEfforts(formatter.format(date.time).toString()).observe(viewLifecycleOwner, Observer {
-                    it?.let {
-                        adapter.data = it
+               // var list:List<Efforts> = mainViewModel.getTicketsForDate(sendval)
+               // Log.i("@@",list.toString())
 
-                        for(item in it) {
-                            Log.i("@@", item.toString())
-                        }
+                adapter.setEfforts(mainViewModel.getTicketsForDate(sendval))
 
-                        if (adapter.data.size > 0)
-                        {
+                if(mainViewModel.getTicketsForDate(sendval).size>0) {
 
-                            recyclerView.visibility = (View.VISIBLE)
-                            empty_text.visibility = (View.INVISIBLE)
-                        }
-                        else
-                        {
-                            recyclerView.visibility = (View.INVISIBLE)
-                            empty_text.visibility = (View.VISIBLE)
-                        }
-                    } })
+                    recyclerView.visibility = (View.VISIBLE)
+                    empty_text.visibility = (View.INVISIBLE)
+                }
+
+                else
+                {
+                    recyclerView.visibility = (View.INVISIBLE)
+                    empty_text.visibility = (View.VISIBLE)
+                }
+
 
                 recyclerView.adapter = adapter
+
+
+//                mainViewModel.retriveEfforts(formatter.format(date.time).toString()).observe(viewLifecycleOwner, Observer {
+//                    it?.let {
+ //                      adapter.data = it
+//
+//                        for(item in it) {
+//                            Log.i("@@", item.toString())
+//                        }
+//
+//                        if (adapter.data.size > 0)
+//                        {
+//
+//                            recyclerView.visibility = (View.VISIBLE)
+//                            empty_text.visibility = (View.INVISIBLE)
+//                        }
+//                        else
+//                        {
+//                            recyclerView.visibility = (View.INVISIBLE)
+//                            empty_text.visibility = (View.VISIBLE)
+//                        }
+//                    } })
+//
+//                recyclerView.adapter = adapter
+
+                submitbutton.setOnClickListener {
+                    var totalEffort : Int = 0
+                    for (item in adapter.getUpdatedEfforts()){
+                       totalEffort =  totalEffort+item.Logged_efforts
+                    }
+                    if(totalEffort > 8){
+
+
+                        val builder = AlertDialog.Builder(activity!!)
+
+                        builder.setTitle("Note")
+                        builder.setMessage("You Cannot log more than 8 hours per day!")
+                        builder.setIcon(R.drawable.baseline_warning_black_24)
+
+                        builder.setNeutralButton("Ok"){dialogInterface , which ->
+                            dialogInterface.dismiss()
+                        }
+
+                        val alertDialog: AlertDialog = builder.create()
+                        alertDialog.setCancelable(false)
+                        alertDialog.show()
+
+
+
+                    }else {
+                        effortdisplay.text = totalEffort.toString() + " Hrs"
+                        //mainViewModel.bulkInsertUpdateEfforts(adapter.getUpdatedEfforts(), sendval)
+
+
+                        val builder = AlertDialog.Builder(activity!!)
+
+                        builder.setTitle("Submit")
+                        builder.setMessage("Are you sure to submit timesheet for the day - " + sendval + "?")
+                        builder.setIcon(R.drawable.baseline_warning_black_24)
+                        builder.setPositiveButton("Yes") { dialogInterface, which ->
+                            mainViewModel.bulkInsertUpdateEfforts(adapter.getUpdatedEfforts(), sendval)
+                            Toast.makeText(context,"Submitted Successfully",Toast.LENGTH_SHORT).show()
+                        }
+                        builder.setNeutralButton("Cancel") { dialogInterface, which ->
+                            dialogInterface.dismiss()
+                        }
+
+                        val alertDialog: AlertDialog = builder.create()
+                        alertDialog.setCancelable(false)
+                        alertDialog.show()
+                    }
+
+                }
+
             }
 
             override fun onCalendarScroll(calendarView: HorizontalCalendarView?, dx: Int, dy: Int)
@@ -182,10 +265,7 @@ class MainFragment : Fragment() {
 
         horizontalCalendar.refresh()
 
-        submitbutton.setOnClickListener {
 
-            //mainViewModel.bulkInsertUpdateEfforts(adapter.getUpdatedEfforts())
-        }
 
 
         button.setOnClickListener {
@@ -203,6 +283,7 @@ class MainFragment : Fragment() {
 
         return view
     }
+
 
 
 
