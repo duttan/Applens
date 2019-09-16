@@ -125,11 +125,8 @@ class CreateTicketFragment: Fragment()
         }
 
 
-          //  createTicketViewModel.onCreateclick(binding.ticketId.text.toString(),binding.ticketDesc.text.toString()) }
-
         binding.opendate.text = "OpenDate: "+ datevalue.toString()
         binding.closeButton.setOnClickListener { activity!!.onBackPressed(); }
-
         binding.setLifecycleOwner(this)
 
 

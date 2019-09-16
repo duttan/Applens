@@ -10,7 +10,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_popup"
-            android:layout_width="395dp"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"

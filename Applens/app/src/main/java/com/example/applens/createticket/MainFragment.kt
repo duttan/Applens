@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.applens.Database.ApplensDatabase
 import com.example.applens.Database.Ticket
 
-import com.example.applens.databinding.FirstPageBinding
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.example.applens.R
 import com.example.applens.pushnotification.NotificationUtils
