@@ -15,22 +15,14 @@ class CreateTicketViewModel(val database: ApplensDatabaseDao,application: Applic
 {
 
 
+    private var count:Int =0
     private var viewModelJob = Job()
-
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
 
     //private var ticket = MutableLiveData<Ticket?>()
-
     //private var alltickets = MutableLiveData<List<Ticket?>>()
-
     // private val tickets = database.getAllTickets()
-
-
-
-
-
-
 
 
     fun onCreateclick(new_ticket:CreateTicketFragment.MyTicket) {
@@ -38,9 +30,6 @@ class CreateTicketViewModel(val database: ApplensDatabaseDao,application: Applic
 
             var ticket = Ticket(new_ticket.id,new_ticket.desc,new_ticket.status,new_ticket.tik_type,new_ticket.projectname,new_ticket.priority,new_ticket.application_name,new_ticket.openDate,new_ticket.closeDate)
             insert(ticket)
-
-
-
         }
     }
 
@@ -49,12 +38,19 @@ class CreateTicketViewModel(val database: ApplensDatabaseDao,application: Applic
     private suspend fun insert(ticket: Ticket) {
         withContext(Dispatchers.IO) {
             database.insert(ticket)
-
             //var alltickets = database.getAllTickets()
-
-
         }
     }
+
+
+
+    fun validate(date:String):Int
+    {
+        return database.getCount(date)
+    }
+
+
+
 
     private fun printo(tiks: List<Ticket>)
     {

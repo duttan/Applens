@@ -27,9 +27,6 @@ class AlarmReceiver:BroadcastReceiver() {
 //        service.data = Uri.parse("custom://" + System.currentTimeMillis())
 //        context.startService(service)
 
-
-
-
     }
 
 }

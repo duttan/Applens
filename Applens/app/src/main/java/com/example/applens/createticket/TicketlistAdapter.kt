@@ -46,7 +46,8 @@ class TicketlistAdapter internal constructor(context: Context, mainViewModel: Ma
 
         holder.ticketid.text = item.ticket_Id
         holder.ticketdesc.text = item.ticketDesc
-        holder.ticketstatus.setSelection(getIndex(holder.ticketstatus,item.StatusID))
+        holder.ticketstatus.setSelection(getIndex(holder.ticketstatus,item.ticketStatus))
+
 
 
         if(!efforts.isEmpty()) {
@@ -54,7 +55,7 @@ class TicketlistAdapter internal constructor(context: Context, mainViewModel: Ma
             val current = efforts[position]
             holder.ticketstatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                    current.StatusID = holder.ticketstatus.selectedItem.toString()
+                    current.ticketStatus = holder.ticketstatus.selectedItem.toString()
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
@@ -62,8 +63,8 @@ class TicketlistAdapter internal constructor(context: Context, mainViewModel: Ma
                 }
             }
 
-            if (current.StatusID != null) {
-                holder.ticketstatus.setSelection(getIndex(holder.ticketstatus, current.StatusID))
+            if (current.ticketStatus != null) {
+                holder.ticketstatus.setSelection(getIndex(holder.ticketstatus, current.ticketStatus))
             }
 
 
@@ -99,6 +100,7 @@ class TicketlistAdapter internal constructor(context: Context, mainViewModel: Ma
 
             holder.img_plus.setOnClickListener {
                 if(count < 8) {
+                    count = item.Logged_efforts
                     count+=1
                     holder.effort.text = count.toString() + " Hrs"
                     current.Logged_efforts = count
@@ -114,6 +116,7 @@ class TicketlistAdapter internal constructor(context: Context, mainViewModel: Ma
             holder.img_minus.setOnClickListener {
 
                 if(count > 0) {
+                    count = item.Logged_efforts
                     count-=1
                     holder.effort.text = count.toString() + " Hrs"
                     current.Logged_efforts = count
@@ -145,50 +148,6 @@ class TicketlistAdapter internal constructor(context: Context, mainViewModel: Ma
         val img_minus:ImageView = itemView.findViewById(R.id.counter_img2)
 
 
-
-
-
-//        fun bind(item: Ticket, position: Int) {
-
-//            val current = efforts[position]
-//
-//            val res = itemView.context.resources
-//            ticketid.text = item.ticket_Id
-//            ticketdesc.text = item.ticket_Desc
-//            ticketstatus.setSelection(getIndex(ticketstatus,item.ticket_Status))
-//
-//
-//
-//            ticketstatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//                override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-//                    current.StatusID = ticketstatus.selectedItem.toString()
-//                }
-//
-//                override fun onNothingSelected(parent: AdapterView<*>) {
-//                    Log.e("@@", "onNothingSelected")
-//                }
-//            }
-//
-//
-//            img_plus.setOnClickListener {
-//                if(count < 8) {
-//                    count+=1
-//                    effort.text = count.toString() + " Hrs"
-//                }
-//            }
-//            img_minus.setOnClickListener {
-//
-//                if(count > 0) {
-//                    count-=1
-//                    effort.text = count.toString() + " Hrs"
-//                }
-//            }
-
-
-
-
-
-//        }
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {

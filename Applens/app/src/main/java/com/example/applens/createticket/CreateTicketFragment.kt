@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -40,7 +42,8 @@ class CreateTicketFragment: Fragment()
 
         try{
              datevalue = arguments!!.getString("MyDateKey")
-        }catch(e: Exception){
+        }
+        catch(e: Exception){
 
 
         }
@@ -75,21 +78,52 @@ class CreateTicketFragment: Fragment()
         binding.createTicketViewModel = createTicketViewModel
 
         binding.createTikButton.setOnClickListener {
+
             var a:String = binding.ticketId.text.toString()
             var b:String = binding.ticketDesc.text.toString()
-            var c:String = binding.spinnerStatus.selectedItem.toString()
-            var d:String = binding.spinnerTicketType.selectedItem.toString()
-            var e:String = binding.spinnerProjname.selectedItem.toString()
-            var f:String = binding.spinnerPriority.selectedItem.toString()
-            var g:String = binding.spinnerApplication.selectedItem.toString()
+            if(!a.equals("") and !b.equals("")) {
+
+                var c: String = binding.spinnerStatus.selectedItem.toString()
+                var d: String = binding.spinnerTicketType.selectedItem.toString()
+                var e: String = binding.spinnerProjname.selectedItem.toString()
+                var f: String = binding.spinnerPriority.selectedItem.toString()
+                var g: String = binding.spinnerApplication.selectedItem.toString()
+                var myticket = MyTicket(a, b, c, d, e, f, g, opendate, closedate)
+                var ticket_count: Int = createTicketViewModel.validate(opendate)
 
 
 
-            var myticket = MyTicket(a,b,c,d,e,f,g,opendate,closedate)
+            if(ticket_count > 10)
+            {
+                val builder = AlertDialog.Builder(activity!!)
 
-            createTicketViewModel.onCreateclick(myticket)
-            activity!!.onBackPressed()
+                builder.setTitle("Note")
+                builder.setMessage("You Cannot create more than 10 tickets per day!")
+                builder.setIcon(R.drawable.baseline_warning_black_24)
+
+                builder.setNeutralButton("Ok"){dialogInterface , which ->
+                    dialogInterface.dismiss()
+                }
+
+                val alertDialog: AlertDialog = builder.create()
+                alertDialog.setCancelable(false)
+                alertDialog.show()
+            }
+            else
+            {
+                //Toast.makeText(activity!!.applicationContext,ticket_count.toString(),Toast.LENGTH_SHORT).show()
+                createTicketViewModel.onCreateclick(myticket)
+            }
+                activity!!.onBackPressed()
+        }else
+            {
+                Toast.makeText(activity!!.applicationContext,"Please fill Ticket ID and Desc",Toast.LENGTH_SHORT).show()
+            }
+
+
+
         }
+
 
           //  createTicketViewModel.onCreateclick(binding.ticketId.text.toString(),binding.ticketDesc.text.toString()) }
 

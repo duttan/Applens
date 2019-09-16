@@ -3,6 +3,7 @@ package com.example.applens.createticket
 import android.graphics.Color
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ import com.example.applens.databinding.FirstPageBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.example.applens.R
 import com.example.applens.pushnotification.NotificationUtils
+import com.wang.avi.AVLoadingIndicatorView
 import devs.mulham.horizontalcalendar.HorizontalCalendar
 import devs.mulham.horizontalcalendar.HorizontalCalendarView
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
@@ -42,6 +44,8 @@ class MainFragment : Fragment() {
 
     private lateinit var viewModel: MainViewModel
 
+    private lateinit var mainViewModel: MainViewModel
+
     private lateinit var calendarView: HorizontalCalendarView
 
     private lateinit var button: Button
@@ -51,6 +55,12 @@ class MainFragment : Fragment() {
     private lateinit var sendval: String
 
     private lateinit var submitbutton:Button
+
+    private lateinit var adapter: TicketlistAdapter
+
+    private lateinit var emptytext: TextView
+
+    private lateinit var anim:AVLoadingIndicatorView
 
 
 
@@ -66,6 +76,8 @@ class MainFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView_ticketlist)
         submitbutton = view.findViewById(R.id.submitbutton)
         var effortdisplay = view.findViewById<TextView>(R.id.effort_display)
+        emptytext = view.findViewById(R.id.empty_text)
+        anim = view.findViewById(R.id.indicator)
 
         submitbutton.isEnabled = true
 
@@ -73,10 +85,12 @@ class MainFragment : Fragment() {
 
 
 
+
+
         val application = requireNotNull(this.activity).application
         val dataSource = ApplensDatabase.getInstance(application).applensDatabaseDao
         val viewModelFactory = MainViewModelFactory(dataSource,application)
-        val mainViewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
 
 
 
@@ -108,12 +122,19 @@ class MainFragment : Fragment() {
             .defaultSelectedDate(today)
             .build()
 
-        Log.i("@@",today.time.toString())
+       // Log.i("@@",today.time.toString())
 
         var immediate = true
         horizontalCalendar.goToday(immediate)
 
-        val adapter = TicketlistAdapter(activity!!.applicationContext,mainViewModel)
+        adapter = TicketlistAdapter(activity!!.applicationContext,mainViewModel)
+
+
+        sendval = formatter.format(today.time).toString()
+        load_recyclerview()
+        anim.hide()
+
+
 
 //        var cache:List<Ticket> = emptyList()
 //
@@ -126,7 +147,6 @@ class MainFragment : Fragment() {
 //        {
 //            mainViewModel.firstEffortLog(cache,sendval)
 //        }
-
 
 
 
@@ -155,32 +175,21 @@ class MainFragment : Fragment() {
 
                }
 
-
-
-               // var list:List<Efforts> = mainViewModel.getTicketsForDate(sendval)
+                // var list:List<Efforts> = mainViewModel.getTicketsForDate(sendval)
                // Log.i("@@",list.toString())
 
-                adapter.setEfforts(mainViewModel.getTicketsForDate(sendval))
-
-                if(mainViewModel.getTicketsForDate(sendval).size>0) {
-
-                    recyclerView.visibility = (View.VISIBLE)
-                    empty_text.visibility = (View.INVISIBLE)
-                }
-
-                else
-                {
-                    recyclerView.visibility = (View.INVISIBLE)
-                    empty_text.visibility = (View.VISIBLE)
-                }
+                anim.show()
+                Handler().postDelayed({
+                    anim.hide()
+                    load_recyclerview()
+                }, 1500)
 
 
-                recyclerView.adapter = adapter
 
 
 //                mainViewModel.retriveEfforts(formatter.format(date.time).toString()).observe(viewLifecycleOwner, Observer {
 //                    it?.let {
- //                      adapter.data = it
+//                      adapter.data = it
 //
 //                        for(item in it) {
 //                            Log.i("@@", item.toString())
@@ -266,8 +275,6 @@ class MainFragment : Fragment() {
         horizontalCalendar.refresh()
 
 
-
-
         button.setOnClickListener {
 
             val createTicketFragment = CreateTicketFragment()
@@ -287,7 +294,31 @@ class MainFragment : Fragment() {
 
 
 
+    fun load_recyclerview()
+    {
+        adapter.setEfforts(mainViewModel.getTicketsForDate(sendval))
 
+        if(mainViewModel.getTicketsForDate(sendval).size>0) {
+
+            recyclerView.visibility = (View.VISIBLE)
+            emptytext.visibility = (View.INVISIBLE)
+        }
+
+        else
+        {
+            recyclerView.visibility = (View.INVISIBLE)
+            emptytext.visibility = (View.VISIBLE)
+        }
+
+
+        recyclerView.adapter = adapter
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        load_recyclerview()
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+
+<ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+        android:background="@color/colorApplensgrey"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_height="match_parent"
+        android:layout_width="match_parent">
 
-    <data>
-
-        <variable
-                name="mainViewModel"
-                type="com.example.applens.createticket.MainViewModel" />
-    </data>
     <FrameLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -20,7 +17,6 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorApplensgrey"
                 android:layout_marginTop="50dp">
 
             <devs.mulham.horizontalcalendar.HorizontalCalendarView
@@ -39,6 +35,46 @@
                     android:layout_marginTop="8dp"
                     app:layout_constraintTop_toTopOf="parent"/>
 
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginLeft="16dp"
+                          android:orientation="vertical"
+                          app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
+                          android:id="@+id/linearLayout2" android:layout_marginTop="16dp"
+                          app:layout_constraintTop_toBottomOf="@+id/calendarView1">
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:orientation="horizontal"
+                              android:layout_marginBottom="5dp">
+                    <TextView
+                            android:id="@+id/effortlogged"
+                            android:layout_width="143dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Effort logged :"
+                            android:textColorHint="#ffffff"
+                            android:textColor="#FFFFFF"
+                            android:text="Effort logged today:"
+                            app:fontFamily="sans-serif-medium" android:textStyle="bold"/>
+
+                    <TextView
+                            android:id="@+id/effort_display"
+                            android:layout_width="55dp"
+                            android:layout_height="wrap_content"
+                            android:text="0:00"
+                            android:textColor="#FFFFFF"
+                    />
+
+                </LinearLayout>
+
+                <View
+                        android:layout_width="275dp"
+                        android:layout_height="1dp"
+                        android:background="@color/colorWhite"
+                        android:id="@+id/view"
+                />
+            </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView_ticketlist"
                     android:layout_width="match_parent"
@@ -50,16 +86,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginRight="4dp"
                     android:visibility="visible"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-            <View
-                    android:layout_width="275dp"
-                    android:layout_height="1dp"
-                    android:background="@color/colorWhite"
-                    android:id="@+id/view"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintTop_toBottomOf="@+id/effortlogged"
-                    android:layout_marginTop="3dp"/>
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" android:layout_marginTop="32dp"/>
+
 
             <Button
                     android:id="@+id/submitbutton"
@@ -69,33 +98,13 @@
                     style="@style/RoundedButton"
                     android:layout_marginEnd="16dp"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="16dp"
-                    app:layout_constraintBottom_toTopOf="@+id/textView5" android:layout_marginTop="28dp"
-                    app:layout_constraintTop_toTopOf="@+id/effortlogged" app:layout_constraintVertical_bias="0.558"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+                    app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"/>
 
-            <TextView
-                    android:id="@+id/effortlogged"
-                    android:layout_width="143dp"
-                    android:layout_height="wrap_content"
-                    android:hint="Effort logged :"
-                    android:textColorHint="#ffffff"
-                    android:textColor="#FFFFFF"
-                    android:text="Effort logged today:"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="16dp" android:layout_marginStart="16dp"
-                    app:layout_constraintTop_toTopOf="@+id/calendarView1" android:layout_marginTop="100dp"
-                    app:fontFamily="sans-serif-medium" android:textStyle="bold"/>
 
-            <TextView
-                    android:id="@+id/effort_display"
-                    android:layout_width="55dp"
-                    android:layout_height="27dp"
-                    android:text="0:00"
-                    android:textColor="#FFFFFF"
-                    app:layout_constraintBottom_toBottomOf="@+id/effortlogged"
-                    app:layout_constraintTop_toTopOf="@+id/effortlogged"
-                    app:layout_constraintVertical_bias="0.0" app:layout_constraintStart_toEndOf="@+id/effortlogged"
-                    android:layout_marginLeft="1dp" android:layout_marginStart="1dp"/>
+
+
             <TextView
                     android:text="Available Tickets:"
                     android:layout_width="wrap_content"
@@ -106,8 +115,6 @@
                     android:layout_marginStart="16dp"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="24dp"
-                    app:layout_constraintTop_toBottomOf="@+id/effortlogged"
                     app:fontFamily="sans-serif-medium"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toTopOf="@+id/recyclerView_ticketlist"/>
@@ -126,12 +133,31 @@
                     app:layout_constraintBottom_toBottomOf="@+id/recyclerView_ticketlist"
                     android:text="  +   Create Ticket  "
                     android:textStyle="bold"/>
+
+            <com.wang.avi.AVLoadingIndicatorView
+                    android:id="@+id/indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:indicatorName="LineScalePulseOutRapidIndicator"
+                    app:indicatorColor="@color/colorApplensblue"
+                    app:layout_constraintBottom_toBottomOf="@+id/recyclerView_ticketlist"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="@+id/calendarView1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintVertical_bias="0.544"/>
+
             <TextView
                     android:text="No Available Tickets"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="invisible"
-                    android:id="@+id/empty_text" app:layout_constraintStart_toStartOf="parent"
+                    android:id="@+id/empty_text"
+                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp" android:textColor="#FFFFFF" android:layout_marginBottom="276dp"
@@ -140,4 +166,4 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
-</layout>
+</ScrollView>

@@ -13,9 +13,6 @@ class TicketRepository (private val applensDatabaseDao: ApplensDatabaseDao)     
     }
 
 
-    fun update(ticket: Ticket) {
-        applensDatabaseDao.update(ticket)
-    }
 
 
 

@@ -8,7 +8,7 @@ data class Efforts(
         @Nullable val ticketDesc: String?,
         @Nullable var TimeSheetID: String,
         @Nullable var Logged_efforts: Int,
-        @Nullable var StatusID: String,
+        @Nullable var ticketStatus: String,
         @Nullable var EffortDate: String?,
         @Nullable var ServiceID: String?,
         @Nullable var ActivityID: String?

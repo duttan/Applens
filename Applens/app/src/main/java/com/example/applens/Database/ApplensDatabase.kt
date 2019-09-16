@@ -12,7 +12,7 @@ import androidx.room.RoomDatabase
  * This pattern is pretty much the same for any database,
  * so you can reuse it.
  */
-@Database(entities = [Ticket::class, TimeSheet::class], version = 27, exportSchema = false)
+@Database(entities = [Ticket::class, TimeSheet::class], version = 28, exportSchema = false)
 abstract class ApplensDatabase : RoomDatabase() {
 
     /**

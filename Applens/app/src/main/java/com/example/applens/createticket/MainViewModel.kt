@@ -24,7 +24,7 @@ class MainViewModel(val database: ApplensDatabaseDao, application: Application):
     // var alltickets = database.getAllTickets()
     val allTicket: LiveData<List<Ticket>>
 
-    val timeSheetDao = ApplensDatabase.getInstance(application).timesheetDao
+   // val timeSheetDao = ApplensDatabase.getInstance(application).timesheetDao
     private var repository: TicketRepository
     private var repoTimesheet: TimesheetRepository
 
@@ -32,6 +32,7 @@ class MainViewModel(val database: ApplensDatabaseDao, application: Application):
 
 
     init {
+
         val timeSheetDao = ApplensDatabase.getInstance(application).timesheetDao
 
         repository = TicketRepository(database)
@@ -63,9 +64,10 @@ class MainViewModel(val database: ApplensDatabaseDao, application: Application):
     fun bulkInsertUpdateEfforts(efforts:List<Efforts>,date_str: String) = uiScope.launch {
         for(effort in efforts) {
             try {
-                var timeSheet = TimeSheet(effort.ticket_Id+date_str,effort.ticket_Id!!,effort.Logged_efforts,effort.StatusID!!,date_str,effort.ServiceID!!,effort.ActivityID!!)
-                repoTimesheet.insertupdate1(timeSheet,effort.Logged_efforts,effort.StatusID,effort.ServiceID!!,effort.ActivityID!!,effort.ticket_Id+date_str)
-                }
+                var timeSheet = TimeSheet(effort.ticket_Id+date_str,effort.ticket_Id!!,effort.Logged_efforts,effort.ticketStatus!!,date_str,effort.ServiceID!!,effort.ActivityID!!)
+                repoTimesheet.insertupdate1(timeSheet,effort.Logged_efforts,effort.ticketStatus,effort.ServiceID!!,effort.ActivityID!!,effort.ticket_Id+date_str)
+                database.update_ticket_status(effort.ticketStatus,effort.ticket_Id)
+            }
 
             catch (e: Exception ){
                 //var timeSheet = TimeSheet(effort.ticket_Id+date_str,effort.ticket_Id!!,effort.Logged_efforts,effort.StatusID!!,"date1",effort.ServiceID!!,effort.ActivityID!!)
@@ -80,8 +82,8 @@ class MainViewModel(val database: ApplensDatabaseDao, application: Application):
 
         for(ticket in tickets) {
 
-
             try {
+
                 var timeSheet = TimeSheet(ticket.ticket_Id+date_str,ticket.ticket_Id,ticket.ticket_Effort,ticket.ticket_Status,date_str,ticket.ticket_Service,ticket.ticket_Activity)
                 repoTimesheet.insertupdate(timeSheet,ticket.ticket_Effort,ticket.ticket_Status,ticket.ticket_Service,ticket.ticket_Activity,ticket.ticket_Id+date_str)
 
