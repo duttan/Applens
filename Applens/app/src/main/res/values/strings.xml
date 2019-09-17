@@ -63,18 +63,30 @@
 
 
 
+    <string-array name="spinner_status_entries_search">
+        <item>Not sure</item>
+        <item>Open</item>
+        <item>Closed</item>
+        <item>Pending Customer</item>
+        <item>Reopen</item>
+        <item>Work in Progress</item>
+    </string-array>
+
+
+
     <string-array name="spinner_application_entries_search">
+        <item>Not sure</item>
         <item>Huggies Rewards</item>
         <item>Pampers Rewards</item>
-        <item>Not sure</item>
     </string-array>
+
     <string-array name="spinner_activity_entries_search">
+        <item>Not sure</item>
         <item>Ticket recording</item>
         <item>Incident Reporting</item>
         <item>Documentation</item>
         <item>KEDB Update</item>
         <item>Others</item>
-        <item>Not sure</item>
     </string-array>
 
 

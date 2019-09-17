@@ -54,75 +54,86 @@ class Search : Fragment() {
 
 
 
+
+
         val adapter = SearchlistAdapter()
 
         search.setOnClickListener {
 
 
-            if((filter1.selectedItem.toString().equals("Not sure")) && (!filter2.selectedItem.toString().equals("Not sure")))
-            {
-                filtertwo = filter2.selectedItem.toString()
-            }
-            else if((filter2.selectedItem.toString().equals("Not sure")) && (!filter1.selectedItem.toString().equals("Not sure")))
-            {
-                filterone = filter1.selectedItem.toString()
-            }
-            else if(!(filter2.selectedItem.toString().equals("Not sure")) && !(filter1.selectedItem.toString().equals("Not sure")))
-            {
-                filter = "both"
-            }
-            else
-            {
-                filter = "none"
-            }
+            searchviewModel.megafilter(id.text.toString(),status.selectedItem.toString(),filter2.selectedItem.toString(),filter1.selectedItem.toString()).observe(viewLifecycleOwner, Observer {
+                it?.let {
+                    adapter.data = it
+                } })
 
 
-            if((filter1.selectedItem.toString().equals("Not sure")) && (!filter2.selectedItem.toString().equals("Not sure")))
-            {
-                filtertwo = filter2.selectedItem.toString()
-            }
-            else if((filter2.selectedItem.toString().equals("Not sure")) && (!filter1.selectedItem.toString().equals("Not sure")))
-            {
-                filterone = filter1.selectedItem.toString()
-            }
-            else if((!filter2.selectedItem.toString().equals("Not sure")) && (!filter1.selectedItem.toString().equals("Not sure")))
-            {
-                filter = "both"
-            }
-            else
-            {
-                //filter = "none"
-            }
 
-            if(filter.equals("both"))
-            {
-                searchviewModel.filterTickets2(filter1.selectedItem.toString(),filter2.selectedItem.toString()).observe(viewLifecycleOwner, Observer {
-                    it?.let {
-                        adapter.data = it
-                    } })
-            }
-            else if(filterone.equals(filter1.selectedItem.toString()))
-            {
-                searchviewModel.filterTickets11(filterone).observe(viewLifecycleOwner, Observer {
-                    it?.let {
-                        adapter.data = it
-                    } })
-            }
-            else if(filtertwo.equals(filter2.selectedItem.toString()))
-            {
-                searchviewModel.filterTickets12(filtertwo).observe(viewLifecycleOwner, Observer {
-                    it?.let {
-                        adapter.data = it
-                    } })
-            }
-            else
-            {
-                searchviewModel.filterTickets3(id.text.toString(),status.selectedItem.toString()).observe(viewLifecycleOwner, Observer {
-                    it?.let {
-                        adapter.data = it
-                    } })
 
-            }
+//
+//            if((filter1.selectedItem.toString().equals("Not sure")) && (!filter2.selectedItem.toString().equals("Not sure")))
+//            {
+//                filtertwo = filter2.selectedItem.toString()
+//            }
+//            else if((filter2.selectedItem.toString().equals("Not sure")) && (!filter1.selectedItem.toString().equals("Not sure")))
+//            {
+//                filterone = filter1.selectedItem.toString()
+//            }
+//            else if(!(filter2.selectedItem.toString().equals("Not sure")) && !(filter1.selectedItem.toString().equals("Not sure")))
+//            {
+//                filter = "both"
+//            }
+//            else
+//            {
+//                filter = "none"
+//            }
+//
+//
+//            if((filter1.selectedItem.toString().equals("Not sure")) && (!filter2.selectedItem.toString().equals("Not sure")))
+//            {
+//                filtertwo = filter2.selectedItem.toString()
+//            }
+//            else if((filter2.selectedItem.toString().equals("Not sure")) && (!filter1.selectedItem.toString().equals("Not sure")))
+//            {
+//                filterone = filter1.selectedItem.toString()
+//            }
+//            else if((!filter2.selectedItem.toString().equals("Not sure")) && (!filter1.selectedItem.toString().equals("Not sure")))
+//            {
+//                filter = "both"
+//            }
+//            else
+//            {
+//                //filter = "none"
+//            }
+//
+//            if(filter.equals("both"))
+//            {
+//                searchviewModel.filterTickets2(filter1.selectedItem.toString(),filter2.selectedItem.toString()).observe(viewLifecycleOwner, Observer {
+//                    it?.let {
+//                        adapter.data = it
+//                    } })
+//            }
+//            else if(filterone.equals(filter1.selectedItem.toString()))
+//            {
+//                searchviewModel.filterTickets11(filterone).observe(viewLifecycleOwner, Observer {
+//                    it?.let {
+//                        adapter.data = it
+//                    } })
+//            }
+//            else if(filtertwo.equals(filter2.selectedItem.toString()))
+//            {
+//                searchviewModel.filterTickets12(filtertwo).observe(viewLifecycleOwner, Observer {
+//                    it?.let {
+//                        adapter.data = it
+//                    } })
+//            }
+//            else
+//            {
+//                searchviewModel.filterTickets3(id.text.toString(),status.selectedItem.toString()).observe(viewLifecycleOwner, Observer {
+//                    it?.let {
+//                        adapter.data = it
+//                    } })
+//
+//            }
 
 
 

@@ -31,20 +31,25 @@ interface ApplensDatabaseDao {
 
 
 
-    @Query("SELECT * from ticket_table WHERE application = :key1" )
-    fun getAllTickets11(key1: String): LiveData<List<Ticket>>
+//    @Query("SELECT * from ticket_table WHERE application = :key1" )
+//    fun getAllTickets11(key1: String): LiveData<List<Ticket>>
+//
+//    @Query("SELECT * from ticket_table WHERE ticketActivity = :key1 ")
+//    fun getAllTickets12(key1: String): LiveData<List<Ticket>>
+//
+//    @Query("SELECT * from ticket_table WHERE application = :key1 and ticketActivity = :key2")
+//    fun getAllTickets2(key1: String, key2: String): LiveData<List<Ticket>>
+//
+//    @Query("SELECT * from ticket_table WHERE ticket_Id = :key1 or ticketStatus = :key2")
+//    fun getAllTickets3(key1: String, key2: String): LiveData<List<Ticket>>
 
-    @Query("SELECT * from ticket_table WHERE ticketActivity = :key1 ")
-    fun getAllTickets12(key1: String): LiveData<List<Ticket>>
 
-    @Query("SELECT * from ticket_table WHERE application = :key1 and ticketActivity = :key2")
-    fun getAllTickets2(key1: String, key2: String): LiveData<List<Ticket>>
+    @Query("SELECT * from ticket_table WHERE ticket_Id = :key1 or ticketStatus = :key2 or ticketActivity = :key3 or application = :key4")
+    fun superfilter(key1: String, key2: String, key3: String, key4: String): LiveData<List<Ticket>>
 
-    @Query("SELECT * from ticket_table WHERE ticket_Id = :key1 or ticketStatus = :key2")
-    fun getAllTickets3(key1: String, key2: String): LiveData<List<Ticket>>
 
-    @Query("UPDATE ticket_table SET ticketStatus = :sta WHERE ticket_Id = :key")
-    fun update_ticket_status(sta:String, key:String)
+    @Query("UPDATE ticket_table SET ticketStatus = :sta, ticketActivity = :activity WHERE ticket_Id = :key")
+    fun update_ticket_status(sta:String, key:String, activity:String)
 
     @Query("Delete from ticket_table")
     fun deleteAll()

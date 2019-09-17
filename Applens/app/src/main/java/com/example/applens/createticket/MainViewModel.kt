@@ -66,7 +66,7 @@ class MainViewModel(val database: ApplensDatabaseDao, application: Application):
             try {
                 var timeSheet = TimeSheet(effort.ticket_Id+date_str,effort.ticket_Id!!,effort.Logged_efforts,effort.ticketStatus!!,date_str,effort.ServiceID!!,effort.ActivityID!!)
                 repoTimesheet.insertupdate1(timeSheet,effort.Logged_efforts,effort.ticketStatus,effort.ServiceID!!,effort.ActivityID!!,effort.ticket_Id+date_str)
-                database.update_ticket_status(effort.ticketStatus,effort.ticket_Id)
+                database.update_ticket_status(effort.ticketStatus,effort.ticket_Id,effort.ActivityID!!)
             }
 
             catch (e: Exception ){

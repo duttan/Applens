@@ -20,21 +20,26 @@ class SearchViewModel(val database: ApplensDatabaseDao, application: Application
     var alltickets = database.getAllTickets()
 
 
-    fun filterTickets11(filter_str1: String): LiveData<List<Ticket>> {
-        return database.getAllTickets11(filter_str1)
-    }
+//    fun filterTickets11(filter_str1: String): LiveData<List<Ticket>> {
+//        return database.getAllTickets11(filter_str1)
+//    }
+//
+//    fun filterTickets12(filter_str1: String): LiveData<List<Ticket>> {
+//        return database.getAllTickets12(filter_str1)
+//    }
+//
+//
+//    fun filterTickets2(filter_str1: String,filter_str2: String): LiveData<List<Ticket>> {
+//        return database.getAllTickets2(filter_str1,filter_str2)
+//    }
+//
+//    fun filterTickets3(filter_str1: String,filter_str2: String): LiveData<List<Ticket>> {
+//        return database.getAllTickets3(filter_str1,filter_str2)
+//    }
 
-    fun filterTickets12(filter_str1: String): LiveData<List<Ticket>> {
-        return database.getAllTickets12(filter_str1)
-    }
 
-
-    fun filterTickets2(filter_str1: String,filter_str2: String): LiveData<List<Ticket>> {
-        return database.getAllTickets2(filter_str1,filter_str2)
-    }
-
-    fun filterTickets3(filter_str1: String,filter_str2: String): LiveData<List<Ticket>> {
-        return database.getAllTickets3(filter_str1,filter_str2)
+    fun megafilter(filter_str1: String,filter_str2: String, filter_str3: String, filter_str4: String): LiveData<List<Ticket>> {
+        return database.superfilter(filter_str1,filter_str2,filter_str3,filter_str4)
     }
 
 
