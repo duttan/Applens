@@ -7,56 +7,60 @@ import androidx.lifecycle.MutableLiveData
 import com.example.applens.createticket.Efforts
 import com.example.applens.createticket.Report
 import kotlinx.coroutines.*
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.Exception
 
 
-class TimesheetRepository(private val timesheetDao: TimesheetDao){
+class TimesheetRepository(private val timesheetDao: TimesheetDao) {
 
+
+    var formatter = SimpleDateFormat("YYYY-MM-dd")
 
     private var timeSheetsForDate: List<Efforts> = emptyList()
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
+    var today = Calendar.getInstance()
+
+    val date = formatter.format(today.time).toString()
+
+//    init {
+//        timeSheetsForDate = getT(date)
+//    }
+
 
     //   val allTickets: LiveData<List<TimeSheet>> = timesheetDao.gettimesheet()
 
 
-@Throws(Exception::class)
-    fun insertupdate(timesheet: TimeSheet,eff:Int,sta:String,ser:String,act:String, key:String)   {
+    @Throws(Exception::class)
+    fun insertupdate(timesheet: TimeSheet, eff: Int, sta: String, ser: String, act: String, key: String) {
 
 
         uiScope.launch {
             try {
                 insertSheet(timesheet)
-            }
-            catch (e:Exception)
-            {
+            } catch (e: Exception) {
                 // update1(eff,sta,ser,act,key)
             }
             return@launch
         }
 
 
-
-
     }
 
     @Throws(Exception::class)
-    fun insertupdate1(timesheet: TimeSheet,eff:Int,sta:String,ser:String,act:String, key:String)   {
+    fun insertupdate1(timesheet: TimeSheet, eff: Int, sta: String, ser: String, act: String, key: String) {
 
 
         uiScope.launch {
             try {
                 insertSheet(timesheet)
-            }
-            catch (e:Exception)
-            {
-                update1(eff,sta,ser,act,key)
+            } catch (e: Exception) {
+                update1(eff, sta, ser, act, key)
             }
             return@launch
         }
-
-
 
 
     }
@@ -70,10 +74,9 @@ class TimesheetRepository(private val timesheetDao: TimesheetDao){
     }
 
 
-
     fun update(timesheet: TimeSheet) {
         uiScope.launch {
-           updateSheet(timesheet)
+            updateSheet(timesheet)
             return@launch
         }
     }
@@ -86,57 +89,57 @@ class TimesheetRepository(private val timesheetDao: TimesheetDao){
     }
 
 
-
-    fun update1(eff:Int,sta:String,ser:String,act:String, key:String) {
+    fun update1(eff: Int, sta: String, ser: String, act: String, key: String) {
         uiScope.launch {
-            updateSheet1(eff,sta,ser,act,key)
+            updateSheet1(eff, sta, ser, act, key)
             return@launch
 
         }
     }
 
-    suspend fun updateSheet1(eff:Int,sta:String,ser:String,act:String, key:String) {
+    suspend fun updateSheet1(eff: Int, sta: String, ser: String, act: String, key: String) {
         withContext(Dispatchers.IO) {
-            timesheetDao.update1(eff,sta,ser,act,key)
+            timesheetDao.update1(eff, sta, ser, act, key)
             return@withContext
         }
     }
 
 
-
-
-    fun fetchReport():List<Report>
-    {
+    fun fetchReport(): List<Report> {
         return timesheetDao.getreport()
     }
 
 
-
-
-
-
-
     fun getT(date: String): List<Efforts> {
-//        uiScope.launch {
-//            getTimeSheet(date)
-//        }
 
         timeSheetsForDate = timesheetDao.getTimesheet(date)
         return timeSheetsForDate
-        Log.i("@@@",timeSheetsForDate.size.toString())
+
     }
 
-
-//    suspend fun getTimeSheet(date: String) {
-//        withContext(Dispatchers.IO) {
-//
-//            timeSheetsForDate = timesheetDao.getTimesheet(date)
-//
-//        }
-
-
-
-    //}
-
-
 }
+
+//
+//    fun getT(date: String): LiveData<List<Efforts>> {
+//        runBlocking {  getTimeSheet(date) }
+//
+//        return timeSheetsForDate
+//    }
+//
+//    suspend fun getTimeSheet(date: String):LiveData<List<Efforts>> {
+//        withContext(Dispatchers.IO) {
+//            timeSheetsForDate = async { timesheetDao.getTimesheet1(date) }.await()
+//        }
+//
+//        return timeSheetsForDate
+//    }
+//
+//}
+
+
+
+//        timeSheetsForDate = timesheetDao.getTimesheet(date)
+//        return timeSheetsForDate
+
+
+

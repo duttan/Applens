@@ -56,7 +56,7 @@ class MainFragment : Fragment() {
 
     private lateinit var submitbutton:Button
 
-    private lateinit var adapter: TicketlistAdapter
+    private lateinit var thisadapter: TicketlistAdapter
 
     private lateinit var emptytext: TextView
 
@@ -127,7 +127,7 @@ class MainFragment : Fragment() {
         var immediate = true
         horizontalCalendar.goToday(immediate)
 
-        adapter = TicketlistAdapter(activity!!.applicationContext,mainViewModel)
+        thisadapter = TicketlistAdapter(activity!!.applicationContext,mainViewModel)
 
 
         sendval = formatter.format(today.time).toString()
@@ -187,15 +187,18 @@ class MainFragment : Fragment() {
 
 
 
-//                mainViewModel.retriveEfforts(formatter.format(date.time).toString()).observe(viewLifecycleOwner, Observer {
+//                mainViewModel.getTicketsForDate(sendval).observe(viewLifecycleOwner, Observer {
 //                    it?.let {
-//                      adapter.data = it
+//
+//                        thisadapter.setEfforts(it)
+//                     // thisadapter.data = it
+//
 //
 //                        for(item in it) {
 //                            Log.i("@@", item.toString())
 //                        }
 //
-//                        if (adapter.data.size > 0)
+//                        if (it.size > 0)
 //                        {
 //
 //                            recyclerView.visibility = (View.VISIBLE)
@@ -207,12 +210,12 @@ class MainFragment : Fragment() {
 //                            empty_text.visibility = (View.VISIBLE)
 //                        }
 //                    } })
-//
-//                recyclerView.adapter = adapter
+
+//                recyclerView.adapter = thisadapter
 
                 submitbutton.setOnClickListener {
                     var totalEffort : Int = 0
-                    for (item in adapter.getUpdatedEfforts()){
+                    for (item in thisadapter.getUpdatedEfforts()){
                        totalEffort =  totalEffort+item.Logged_efforts
                     }
                     if(totalEffort > 8){
@@ -245,7 +248,7 @@ class MainFragment : Fragment() {
                         builder.setMessage("Are you sure to submit timesheet for the day - " + sendval + "?")
                         builder.setIcon(R.drawable.baseline_warning_black_24)
                         builder.setPositiveButton("Yes") { dialogInterface, which ->
-                            mainViewModel.bulkInsertUpdateEfforts(adapter.getUpdatedEfforts(), sendval)
+                            mainViewModel.bulkInsertUpdateEfforts(thisadapter.getUpdatedEfforts(), sendval)
                             Toast.makeText(context,"Submitted Successfully",Toast.LENGTH_SHORT).show()
                         }
                         builder.setNeutralButton("Cancel") { dialogInterface, which ->
@@ -296,7 +299,7 @@ class MainFragment : Fragment() {
 
     fun load_recyclerview()
     {
-        adapter.setEfforts(mainViewModel.getTicketsForDate(sendval))
+        thisadapter.setEfforts(mainViewModel.getTicketsForDate(sendval))
 
         if(mainViewModel.getTicketsForDate(sendval).size>0) {
 
@@ -311,7 +314,7 @@ class MainFragment : Fragment() {
         }
 
 
-        recyclerView.adapter = adapter
+        recyclerView.adapter = thisadapter
     }
 
 

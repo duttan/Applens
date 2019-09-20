@@ -48,11 +48,11 @@ class MainViewModel(val database: ApplensDatabaseDao, application: Application):
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    fun retriveEfforts(date_str: String): List<Efforts>{
-
-       // return timeSheetDao.getTimesheet1(date_str)
-        return repoTimesheet.getT(date_str)
-         }
+//    fun retriveEfforts(date_str: String): LiveData<List<Efforts>>{
+//
+//       // return timeSheetDao.getTimesheet1(date_str)
+//        return repoTimesheet.getT(date_str)
+//         }
 
     fun retriveTickets(date_str: String): LiveData<List<Ticket>>{
 
