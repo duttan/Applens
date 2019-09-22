@@ -29,6 +29,7 @@ import devs.mulham.horizontalcalendar.HorizontalCalendarView
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
 import devs.mulham.horizontalcalendar.utils.Utils
 import kotlinx.android.synthetic.main.first_page.*
+import kotlinx.coroutines.runBlocking
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.Duration
@@ -187,32 +188,6 @@ class MainFragment : Fragment() {
 
 
 
-//                mainViewModel.getTicketsForDate(sendval).observe(viewLifecycleOwner, Observer {
-//                    it?.let {
-//
-//                        thisadapter.setEfforts(it)
-//                     // thisadapter.data = it
-//
-//
-//                        for(item in it) {
-//                            Log.i("@@", item.toString())
-//                        }
-//
-//                        if (it.size > 0)
-//                        {
-//
-//                            recyclerView.visibility = (View.VISIBLE)
-//                            empty_text.visibility = (View.INVISIBLE)
-//                        }
-//                        else
-//                        {
-//                            recyclerView.visibility = (View.INVISIBLE)
-//                            empty_text.visibility = (View.VISIBLE)
-//                        }
-//                    } })
-
-//                recyclerView.adapter = thisadapter
-
                 submitbutton.setOnClickListener {
                     var totalEffort : Int = 0
                     for (item in thisadapter.getUpdatedEfforts()){
@@ -294,28 +269,56 @@ class MainFragment : Fragment() {
         return view
     }
 
-
-
-
     fun load_recyclerview()
     {
-        thisadapter.setEfforts(mainViewModel.getTicketsForDate(sendval))
+        mainViewModel.getTicketsForDate(sendval).observe(viewLifecycleOwner, Observer {
+            it?.let {
 
-        if(mainViewModel.getTicketsForDate(sendval).size>0) {
+                // thisadapter.setEfforts(it)
+                thisadapter.efforts = it
 
-            recyclerView.visibility = (View.VISIBLE)
-            emptytext.visibility = (View.INVISIBLE)
-        }
+                for (item in it) {
+                    Log.i("@@", item.toString())
+                }
 
-        else
-        {
-            recyclerView.visibility = (View.INVISIBLE)
-            emptytext.visibility = (View.VISIBLE)
-        }
+                if (it.size > 0) {
+
+                    recyclerView.visibility = (View.VISIBLE)
+                    empty_text.visibility = (View.INVISIBLE)
+                } else {
+                    recyclerView.visibility = (View.INVISIBLE)
+                    empty_text.visibility = (View.VISIBLE)
+                }
+            }
+        })
 
 
         recyclerView.adapter = thisadapter
+
     }
+
+
+
+//
+//    fun load_recyclerview()
+//    {
+//        thisadapter.setEfforts(mainViewModel.getTicketsForDate(sendval))
+//
+//        if(mainViewModel.getTicketsForDate(sendval).size>0) {
+//
+//            recyclerView.visibility = (View.VISIBLE)
+//            emptytext.visibility = (View.INVISIBLE)
+//        }
+//
+//        else
+//        {
+//            recyclerView.visibility = (View.INVISIBLE)
+//            emptytext.visibility = (View.VISIBLE)
+//        }
+//
+//
+//        recyclerView.adapter = thisadapter
+//    }
 
 
     override fun onPause() {

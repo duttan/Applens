@@ -109,7 +109,7 @@ class MainViewModel(val database: ApplensDatabaseDao, application: Application):
 
 
 
-    fun getTicketsForDate(date_str: String) : List<Efforts> {
+    fun getTicketsForDate(date_str: String) : LiveData<List<Efforts>> {
         try {
             return repoTimesheet.getT(date_str)
         }
@@ -121,6 +121,19 @@ class MainViewModel(val database: ApplensDatabaseDao, application: Application):
         return repoTimesheet.getT(date_str)
     }
 
+
+
+    fun getTicketsForDate1(date_str: String) : List<Efforts> {
+        try {
+            return repoTimesheet.getT1(date_str)
+        }
+        catch (e:java.lang.Exception)
+        {
+            Log.i("@@@",e.toString())
+        }
+
+        return repoTimesheet.getT1(date_str)
+    }
 
 
     private suspend fun getTickets() {

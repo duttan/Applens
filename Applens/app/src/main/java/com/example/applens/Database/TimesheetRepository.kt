@@ -17,17 +17,17 @@ class TimesheetRepository(private val timesheetDao: TimesheetDao) {
 
     var formatter = SimpleDateFormat("YYYY-MM-dd")
 
-    private var timeSheetsForDate: List<Efforts> = emptyList()
+    private var timeSheetsForDate: LiveData<List<Efforts>>
+    private var timeSheetsForDatePop: List<Efforts> = emptyList()
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     var today = Calendar.getInstance()
-
     val date = formatter.format(today.time).toString()
 
-//    init {
-//        timeSheetsForDate = getT(date)
-//    }
+    init {
+        timeSheetsForDate = getT(date)
+    }
 
 
     //   val allTickets: LiveData<List<TimeSheet>> = timesheetDao.gettimesheet()
@@ -110,29 +110,28 @@ class TimesheetRepository(private val timesheetDao: TimesheetDao) {
     }
 
 
-    fun getT(date: String): List<Efforts> {
+    fun getT1(date: String): List<Efforts> {
 
-        timeSheetsForDate = timesheetDao.getTimesheet(date)
-        return timeSheetsForDate
+        timeSheetsForDatePop = timesheetDao.getTimesheet(date)
+        return timeSheetsForDatePop
 
     }
 
-}
 
-//
-//    fun getT(date: String): LiveData<List<Efforts>> {
-//        runBlocking {  getTimeSheet(date) }
-//
-//        return timeSheetsForDate
-//    }
-//
-//    suspend fun getTimeSheet(date: String):LiveData<List<Efforts>> {
-//        withContext(Dispatchers.IO) {
-//            timeSheetsForDate = async { timesheetDao.getTimesheet1(date) }.await()
-//        }
-//
-//        return timeSheetsForDate
-//    }
+    fun getT(date: String): LiveData<List<Efforts>> {
+        runBlocking { getTimeSheet(date) }
+
+        return timeSheetsForDate
+    }
+
+    suspend fun getTimeSheet(date: String): LiveData<List<Efforts>> {
+        withContext(Dispatchers.IO) {
+            timeSheetsForDate = async { timesheetDao.getTimesheet1(date) }.await()
+        }
+
+        return timeSheetsForDate
+    }
+}
 //
 //}
 

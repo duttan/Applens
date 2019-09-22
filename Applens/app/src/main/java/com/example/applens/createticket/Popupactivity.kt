@@ -33,13 +33,15 @@ class Popupactivity:AppCompatActivity()
 
 
         var datestring:String =  formatter.format(today.time).toString()
-
         var recyclerView = findViewById<RecyclerView>(R.id.recycler_popup)
         var button = findViewById<Button>(R.id.submit)
 
         val adapternew = TicketlistAdapter(this,popViewModel)
 
-        adapternew.setEfforts(popViewModel.getTicketsForDate(datestring))
+        adapternew.setEfforts(popViewModel.getTicketsForDate1(datestring))
+
+        adapternew.efforts
+        adapternew.getUpdatedEfforts()
 
         recyclerView.adapter = adapternew
 

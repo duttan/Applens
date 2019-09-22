@@ -17,14 +17,15 @@ import com.example.applens.R
 class TicketlistAdapter internal constructor(context: Context, mainViewModel: MainViewModel): RecyclerView.Adapter<TicketlistAdapter.ViewHolder>() {
 
      var tickets = emptyList<Ticket>()
-     var efforts = emptyList<Efforts>()
+    // var efforts = emptyList<Efforts>()
      var count:Int = 0
 
-    var data =  listOf<Efforts>()
+    var efforts =  listOf<Efforts>()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
+
 
     var mcontext: Context? = null
     var mmainViewModel: MainViewModel? = null
@@ -108,7 +109,7 @@ class TicketlistAdapter internal constructor(context: Context, mainViewModel: Ma
                 }
             }
 
-            if(current.Logged_efforts!=0)
+            if(current.Logged_efforts >= 0)
             {
                 holder.effort.text = current.Logged_efforts.toString()+ " Hrs"
             }
